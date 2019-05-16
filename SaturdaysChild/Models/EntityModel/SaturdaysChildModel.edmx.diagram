@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="a2cc7cc5f5ff4c6ab3740eb6002249c8" Name="Diagram1">
+        <EntityTypeShape EntityType="SaturdaysChildDbModel.AuditItem" Width="1.5" PointX="3" PointY="6.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="SaturdaysChildDbModel.Blog" Width="1.5" PointX="3" PointY="9.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="SaturdaysChildDbModel.BugReport" Width="1.5" PointX="8.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SaturdaysChildDbModel.Client" Width="1.5" PointX="1.5" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="SaturdaysChildDbModel.Contract" Width="1.5" PointX="3.75" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="SaturdaysChildDbModel.Employee" Width="1.5" PointX="0.75" PointY="9" IsExpanded="true" />
+        <EntityTypeShape EntityType="SaturdaysChildDbModel.Invoice" Width="1.5" PointX="3.75" PointY="16.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="SaturdaysChildDbModel.LaborCategory" Width="1.5" PointX="6" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="SaturdaysChildDbModel.LaborType" Width="1.5" PointX="6" PointY="14.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="SaturdaysChildDbModel.Recommendation" Width="1.5" PointX="3" PointY="12.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="SaturdaysChildDbModel.SiteAccess" Width="1.5" PointX="10.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SaturdaysChildDbModel.SupportTicket" Width="1.5" PointX="6" PointY="9.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="SaturdaysChildDbModel.Timesheet" Width="1.5" PointX="6" PointY="4.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="SaturdaysChildDbModel.WorkItem" Width="1.5" PointX="8.25" PointY="6.875" IsExpanded="true" />
+        <AssociationConnector Association="SaturdaysChildDbModel.FK__AuditItem__Emplo__403A8C7D" ManuallyRouted="false" />
+        <AssociationConnector Association="SaturdaysChildDbModel.FK__Blogs__AuthorId__412EB0B6" ManuallyRouted="false" />
+        <AssociationConnector Association="SaturdaysChildDbModel.FK__Contracts__Clien__4222D4EF" ManuallyRouted="false" />
+        <AssociationConnector Association="SaturdaysChildDbModel.FK__Invoices__Client__440B1D61" ManuallyRouted="false" />
+        <AssociationConnector Association="SaturdaysChildDbModel.FK__SupportTi__Clien__49C3F6B7" ManuallyRouted="false" />
+        <AssociationConnector Association="SaturdaysChildDbModel.FK__Invoices__Contra__4316F928" ManuallyRouted="false" />
+        <AssociationConnector Association="SaturdaysChildDbModel.FK__LaborCate__Contr__44FF419A" ManuallyRouted="false" />
+        <AssociationConnector Association="SaturdaysChildDbModel.FK__SupportTi__Contr__47DBAE45" ManuallyRouted="false" />
+        <AssociationConnector Association="SaturdaysChildDbModel.FK__Timesheet__Contr__4AB81AF0" ManuallyRouted="false" />
+        <AssociationConnector Association="SaturdaysChildDbModel.FK__WorkItems__Contr__4E88ABD4" ManuallyRouted="false" />
+        <AssociationConnector Association="SaturdaysChildDbModel.FK__Recommend__Autho__46E78A0C" ManuallyRouted="false" />
+        <AssociationConnector Association="SaturdaysChildDbModel.FK__SupportTi__EmpId__48CFD27E" ManuallyRouted="false" />
+        <AssociationConnector Association="SaturdaysChildDbModel.FK__Timesheet__Emplo__4CA06362" ManuallyRouted="false" />
+        <AssociationConnector Association="SaturdaysChildDbModel.FK__WorkItems__Emplo__5165187F" ManuallyRouted="false" />
+        <AssociationConnector Association="SaturdaysChildDbModel.FK__Timesheet__Invoi__4BAC3F29" ManuallyRouted="false" />
+        <AssociationConnector Association="SaturdaysChildDbModel.FK__LaborType__Categ__45F365D3" ManuallyRouted="false" />
+        <AssociationConnector Association="SaturdaysChildDbModel.FK__WorkItems__Labor__4F7CD00D" ManuallyRouted="false" />
+        <AssociationConnector Association="SaturdaysChildDbModel.FK__WorkItems__Labor__5070F446" ManuallyRouted="false" />
+        <AssociationConnector Association="SaturdaysChildDbModel.FK__WorkItems__Times__4D94879B" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="SaturdaysChildDbModel.MemberMessage" Width="1.5" PointX="10.375" PointY="3.75" />
+        <AssociationConnector Association="SaturdaysChildDbModel.FK__SupportTi__BugId__73852659" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

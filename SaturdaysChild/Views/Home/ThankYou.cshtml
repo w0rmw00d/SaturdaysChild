@@ -1,0 +1,14 @@
+﻿@model SaturdaysChild.Models.ViewModels.ThanksViewModel
+
+@{
+    ViewBag.Title = "ThankYou";
+}
+
+<div class="content-div content-flex content-all-centered">
+    <div class="content-flex-item">
+        <img class="illustrations" title="'Scenes de la privee et publique des animaux,' JJ Grandville (1842)" src='@Url.Content("/Content/Images/General/monkey-actor.png")' />
+    </div>
+    <div class="content-flex-item content-flex-item-text">
+        <h4 class="subheading">@Model.Message</h4>
+    </div>
+</div>

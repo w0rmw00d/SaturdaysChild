@@ -1,0 +1,245 @@
+﻿@{
+    ViewBag.Title = "Samples";
+}
+
+@section scripts {
+    <script type="text/javascript" src="~/Scripts/flot/jquery.flot.js"></script>
+    <script type="text/javascript" src="~/Scripts/sample-scripts.js"></script>
+}
+
+<!-- modal is shown on page load, compatibility warning, CSS 3+ -->
+<div id="modal-compatibility" class="modal fade" role="dialog" style="padding-top: 10%; background-color: rgba(0,0,0,0.4);">
+    <div class="modal-dialog">
+        <div class="modal-body">
+            <img class="illustrations" src='@Url.Content("/Content/Images/Warnings/css-warning.png")' />
+            <p id="warning-message" style="color: white;">Warning: page features require CSS 3+. If the current browser is not compatible with CSS 3+, several features will not show as intended.</p>
+        </div>
+    </div>
+</div>
+
+<div class="content-div" style="vertical-align: middle;">
+    <h1 class="content-fixed-item">Sample Page Elements</h1>
+
+    <br />
+
+    <!-- first row, jumbotron -->
+    <div class="jumbotron well" style="background-color: lightgray;">
+        <h4 style="margin: 3%;">This is a <strong>jumbotron</strong>. It's frequently used at the top of the page to call additional attention to content or information.</h4>
+    </div>
+
+    <br />
+
+    <!-- second row, carousel -->
+    <!-- NOTE: carousel is CSS 3+ compatible only -->
+    <div class="content-flex">
+        <div class="carousel content-fixed-item" id="sample-carousel">
+            <!-- indicators -->
+            <ol class="carousel-indicators">
+                <li data-target="#sample-carousel" data-slide-to="0" class="active"></li>
+                <li data-target="#sample-carousel" data-slide-to="1"></li>
+                <li data-target="#sample-carousel" data-slide-to="2"></li>
+            </ol>
+
+            <!-- slides -->
+            <div class="carousel-inner">
+                <!-- first slide (active) -->
+                <div class="item active">
+                    <img title="Christian Birkholz (2013)" src='@Url.Content("/Content/Images/Samples/bar-1.jpg")' />
+                </div>
+                <!-- second slide -->
+                <div class="item">
+                    <img title="'Cocktail Bar in Hamburg,' Achim Schleuning (2015)" src='@Url.Content("/Content/Images/Samples/bar-2.jpg")' />
+                </div>
+                <!-- third slide -->
+                <div class="item">
+                    <img title="Pexels (2016)"src='@Url.Content("/Content/Images/Samples/bar-3.jpg")' />
+                </div>
+            </div>
+
+            <!-- slide controls -->
+            <!-- left control (previous) -->
+            <a class="left carousel-control" href="#sample-carousel" data-slide="prev">
+                <span class="glyphicon glyphicon-chevron-left"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <!-- right control (next) -->
+            <a class="right carousel-control" href="#sample-carousel" data-slide="next">
+                <span class="glyphicon glyphicon-chevron-right"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+        <div class="content-flex-item">
+            <h4 style="padding-top: 6%;">This is a <strong>carousel</strong>. It's frequently used to showcase pictures or graphics. These pictures or graphics may be used as links or simply displayed, with or without captions.</h4>
+        </div>
+    </div>
+
+    <br />
+
+    <!-- third row, progress bar -->
+    <div>
+        <h4>This is a <strong>progress bar</strong>. It's typically used to signal progress at a task.</h4>
+        <div class="progress progress-striped active">
+            <div class="progress-bar progress-bar-striped" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
+    </div>
+
+    <br />
+
+    <!-- fourth row, dropdowns -->
+    <div class="content-flex">
+        <div class="content-flex-item">
+            <h4>This is a <strong>dropdown</strong>. These are typically used for menus or other user-selection events so that the menu contents can be hidden unless currently being accessed.</h4>
+        </div>
+        <div class="content-flex-item" style="min-width: 10%; margin-top: 2%;">
+            <div class="dropdown">
+                <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Click me!</button>
+                <ul class="dropdown-menu" style="text-align: center;">
+                    <li>I'm a menu item.</li>
+                    <li>I am, too.</li>
+                    <li>Don't forget about me!</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <br />
+
+    <!-- fifth row, popovers -->
+    <div class="content-flex">
+        <div class="content-flex-item" style="min-width: 10%; margin-top: 2%;">
+            <button type="button" class="btn btn-primary" data-toggle="popover" title="Popover Header" data-content="Popover content goes in here.">Click me!</button>
+        </div>
+        <div class="content-flex-item">
+            <h4>This is a <strong>popover</strong>. These are typically used to give a blurb of information to users when they click an item on the page.</h4>
+        </div>
+    </div>
+
+    <br />
+
+    <!-- sixth row, tooltips -->
+    <div class="content-flex">
+        <div class="content-flex-item">
+            <h4>This is a <strong>tooltip</strong>. These are typically used to give a blurb of information to users when they hover over an item on the page.</h4>
+        </div>
+        <div class="content-flex-item" style="margin-top: 2%;">
+            <button type="button" class="btn btn-primary" data-toggle="tooltip" title="I'm a tooltip!">Hover here!</button>
+        </div>
+    </div>
+
+    <br />
+
+    <!-- seventh row, modals -->
+    <div class="content-flex">
+        <div class="content-flex-item" style="margin-top: 2%;">
+            <!-- modal button -->
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-sample">Click me!</button>
+            <!-- modal -->
+            <div id="modal-sample" class="modal fade" role="dialog" style="padding-top: 5%; background-color: rgba(0,0,0,0.6);">
+                <div class="modal-dialog">
+                    <!-- modal title -->
+                    <div class="modal-header" style="color: dodgerblue;">
+                        <h4 class="modal-title">Modal Title</h4>
+                    </div>
+                    <!-- modal body -->
+                    <div class="modal-body" style="color: #15a9e0">
+                        <p>The text for a modal goes in here.</p>
+                    </div>
+                    <!-- modal footer -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="content-flex-item">
+            <h4>This is a <strong>modal</strong>. These are typically used to give a blurb of information to users. They can also be used to gather information from users or as a part of staging processes.</h4>
+        </div>
+    </div>
+
+    <br />
+
+    <!-- eighth row, tables -->
+    <div class="content-flex">
+        <div class="content-flex-item">
+            <table style="border: 5px solid dodgerblue;">
+                <tr style="border: 5px solid dodgerblue;">
+                    <th>Header #1</th>
+                    <th>Header #2</th>
+                </tr>
+                <tr>
+                    <td>Data #1 goes here</td>
+                    <td>Data #2 goes here</td>
+                </tr>
+            </table>
+        </div>
+        <div class="content-flex-item">
+            <h4>This is a <strong>table</strong>. These are typically used to display tabular data and may be formatted in a variety of different ways.</h4>
+        </div>
+    </div>
+
+    <br />
+
+    <!-- ninth row, input forms -->
+    <div class="content-flex">
+        <div class="content-flex-item" style="margin-top: 3%;">
+            <h4>This is an <strong>input form</strong>. These are typically used to get input from a user.</h4>
+        </div>
+        <div class="content-flex-item">
+            <div class="form-group">
+                <label for="sample-name-input">Name:</label>
+                <input type="text" class="form-control" id="sample-name-input" />
+            </div>
+            <div class="form-group">
+                <label for="sample-email-input">Email:</label>
+                <input type="email" class="form-control" id="sample-email-input" />
+            </div>
+        </div>
+    </div>
+
+    <br />
+
+    <!-- tenth row, animations -->
+    <div class="content-flex">
+        <div class="content-fixed-item">
+            <div title="Bureaucrat with glasses, 'Glitch the Game' (2009-2012)" class="bureaucrat-glasses"></div>
+        </div>
+        <div class="content-flex-item">
+            <h4>This is an <strong>animation</strong>. These are typically used to provide visual interest.</h4>
+        </div>
+    </div>
+
+    <br />
+
+    <!-- eleventh row, static graphs -->
+    <div class="content-flex">
+        <div class="content-flex-item">
+            <img src='@Url.Content("/Content/Images/Graphs/scientific-method-cyclical-graph.png")' />
+        </div>
+        <div class="content-flex-item" style="margin-top: 15%;">
+            <h4>This is a <strong>graph</strong> of the scientific method. Non-interactive graphs are typically used to present data summaries in an easy-to-read, visual form.</h4>
+        </div>
+    </div>
+
+    <br />
+
+    <!-- thirteenth row, interactive graphs -->
+    <div class="content-flex">
+        <div class="content-flex-item" style="margin-top: 15%;">
+            <h4>This is an <strong>interactive graph</strong>. These are typically used to present data summaries and allow users to interact with those data summaries.</h4>
+        </div>
+        <div class="content-flex-item">
+            <div id="graph-wrapper">
+                <div class="graph-info">
+                    <a class="visitors">Visitors</a>
+                    <a class="returning">Returning Visitors</a>
+                    <a id="bars"><span></span></a>
+                    <a id="lines" class="active"><span></span></a>
+                </div>
+                <div class="graph-container">
+                    <div id="graph-lines" style="width: 590px; height: 350px;"></div>
+                    <div id="graph-bars" style="width: 590px; height: 350px;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

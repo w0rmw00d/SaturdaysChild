@@ -1,0 +1,21 @@
+﻿@model DateTime?
+
+<div class="input-group">
+    @Html.TextBox("", Model.HasValue ? Model.Value.ToLocalTime().ToShortTimeString() : null, new { @class = "timepicker" })
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#@Html.IdForModel()').timepicker({
+            scrollDefault: 'now',
+            minTime: '9:00am',
+            maxTime: '5:00pm',
+            step: 15,
+            forceRoundTime: true,
+            orientation: 'b',
+            selectOnBlur: true,
+            stopScrollPropagation: true,
+            timeFormat: 'g:i a'
+        });
+    });
+</script>

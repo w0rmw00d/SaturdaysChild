@@ -1,0 +1,26 @@
+﻿@model SaturdaysChild.Models.ViewModels.ResultsViewModel
+
+@{
+    ViewBag.Title = "Results";
+}
+
+<div class="content-div">
+    @if (Model.Results.Count() == 0)
+    {
+        <h3>No results were found.</h3>
+    }
+    @foreach (var result in Model.Results)
+    {
+        <div class="result-container">
+            <!-- title of result -->
+            <a href='@string.Format(@result.Link)'><h3>@result.Title</h3></a>
+            <!-- publication date and text of result -->
+            <p>
+                <strong class="result-subheading">@result.PubDate.ToShortDateString() - </strong>
+                @result.Description
+            </p>
+            <!-- tags of result -->
+            <p><strong>Tagged: </strong>@result.Tags</p>
+        </div>
+    }
+</div>

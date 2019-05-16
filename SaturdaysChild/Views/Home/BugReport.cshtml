@@ -1,0 +1,43 @@
+﻿@model SaturdaysChild.Models.ViewModels.BugReportViewModel
+
+@{
+    ViewBag.Title = "BugReport";
+}
+
+@section scripts {
+    <link rel="stylesheet" href="~/Content/jquery.timepicker.css" type="text/css" />
+    <script type="text/javascript" src="~/Scripts/jquery.timepicker.min.js"></script>
+}
+
+<div class="content-div">
+    <h2 class="content-all-centered">Report a Bug</h2>
+    @using (Html.BeginForm("BugReport", "Home", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        <div class="content-flex">
+            <div class="content-flex-item">
+                <table>
+                    <tr>
+                        <th>@Html.LabelFor(a => a.BugTime)</th>
+                        <td>@Html.EditorFor(a => a.BugTime, new { @class = "textbox" })</td>
+                    </tr>
+                    <tr>
+                        <th>@Html.LabelFor(a => a.BugType)</th>
+                        <td>@Html.DropDownListFor(a => a.BugType, new SelectList(Model.BugTypes, "TypeId", "TypeName", null))</td>
+                    </tr>
+                    <tr>
+                        <th>@Html.LabelFor(a => a.BugDescription)</th>
+                        <td>@Html.TextAreaFor(a => a.BugDescription, 10, 45, null)</td>
+                    </tr>
+                    <tr>
+                        <th></th>
+                        <td><input class="pull-right" type="submit" value="Send" /></td>
+                    </tr>
+                </table>
+            </div>
+            <div class="content-flex-item">
+                <img class="illustrations" title="'Scenes de la privee et publique des animaux,' JJ Grandville (1842)" src='@Url.Content("/Content/Images/Errors/bug-ballerina.png")' />
+            </div>
+        </div>
+    }
+</div>

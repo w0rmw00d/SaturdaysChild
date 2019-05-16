@@ -1,0 +1,59 @@
+﻿<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Saturday's Child</title>
+        <meta name="description" content="Full-stack development. Blogging on security, small business, and algorithms. Education for users. UI/UX design. Saturday's Child provides full service development for hire.'" />
+        <meta name="keywords" content="C#, full stack, UI/UX design, MVC, Java, Javascript, research, education" />
+        @Styles.Render("~/Content/css")
+        @Scripts.Render("~/bundles/modernizr")
+        @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/bootstrap")
+        @Scripts.Render("~/bundles/layout")
+    </head>
+    <body>
+        <!-- top navigation bar -->
+        <div class="nav navbar navbar-inverse navbar-fixed-top">
+            <!-- menu icon, used to toggle visibility for nav menus -->
+            <a href="#" type="button" id="top-logo" aria-labelledby="collapse top menu" class="navbar-brand pull-left">
+                <img src='@Url.Content("~/Content/Images/Icons/glyphicons-menu-color.png")' />
+            </a>
+            <!-- top nav menu, horizontal, visible only when viewscreen is large -->
+            <ul class="nav navbar-nav top-nav-list" id="top-nav-list">
+                <li aria-labelledby="about">@Html.ActionLink("About", "About", "Home", null, null)</li>
+                <li aria-labelledby="contact">@Html.ActionLink("Contact", "Contact", "Home", null, null)</li>
+                <li aria-labelledby="home">@Html.ActionLink("Home", "Index", "Home", null, null)</li>
+                <li aria-labelledby="pricing">@Html.ActionLink("Hire Me", "HireMe", "Home", null, null)</li>
+                <li aria-labelledby="samples">@Html.ActionLink("Sample Elements", "Samples", "Home", null, null)</li>
+            </ul>
+            <!-- search form -->
+            <form id="search-form" class="navbar-form navbar-search pull-right" role="search" action='@Url.Action("Search", "Home")' method="get">
+                <div class="input-group">
+                    <input class="form-control" autocomplete="on" spellcheck="true" autofocus="autofocus" type="text" aria-labelledby="search box" name="searchterms" />
+                    <span class="input-group-btn">
+                        <button type="submit" class="btn btn-default" aria-labelledby="submit search">
+                            <span class="glyphicon glyphicon-search" />
+                        </button>
+                    </span>
+                </div>
+            </form>            
+        </div>
+        <!-- content/body -->
+        <div class="body-content">
+            @RenderBody()
+        </div>
+        <!-- footer -->
+        <footer>
+            <div class="pull-left">
+                <a href='@Url.Action("PrivacyPolicy", "Home", null)' aria-labelledby="privacy policy"><img src='@Url.Content("/Content/Images/Icons/glyphicons-tower-color.png")' /></a>
+                <a href='@Url.Action("BugReport", "Home", null)' aria-labelledby="report bugs"><img src='@Url.Content("/Content/Images/Icons/glyphicons-bug-color.png")' /></a>
+            </div>
+            <div class="pull-right">
+                <a href='@Url.Action("Login", "Account", null)' aria-labelledby="login"><img src='@Url.Content("/Content/Images/Icons/glyphicons-login-color.png")' /></a>
+                <a href="https://github.com/w0rmw00d" aria-labelledby="github"><img src='@Url.Content("/Content/Images/Icons/github-silhouette-color.png")' /></a>
+            </div>
+        </footer>
+        @RenderSection("scripts", required: false)
+    </body>
+</html>

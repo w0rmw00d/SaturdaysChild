@@ -1,0 +1,25 @@
+﻿@model SaturdaysChild.Models.ViewModels.BugHistoryViewModel
+
+@{
+    ViewBag.Title = "History";
+}
+
+<h3>Closed Bugs</h3>
+
+<table>
+    <tr>
+        <th>Time</th>
+        <th>Type</th>
+        <th>Description</th>
+        <th>Support Ticket</th>
+    </tr>
+    @foreach (var item in Model.ClosedBugList)
+    {
+        <tr>
+            <td>@item.BugTime.ToShortDateString()</td>
+            <td>@item.BugType</td>
+            <td>@item.BugDescription</td>
+            <td>@Html.ActionLink("Support Ticket", "Detail", "Support", new { @id = item.Id }, null)</td>
+        </tr>
+    }
+</table>

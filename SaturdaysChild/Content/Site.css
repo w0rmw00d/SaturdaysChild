@@ -1,0 +1,617 @@
+﻿/* setting link color */
+a {
+    color: dodgerblue;
+}
+
+/* removing text decoration from links when hovered over by cursor */
+a:hover {
+    text-decoration: none;
+    text-decoration-line: none;
+    color: deepskyblue;
+}
+
+/* removing text decoration from links when active */
+a:active {
+    text-decoration: none;
+    text-decoration-line: none;
+}
+
+/* styling active 'bars' button on interactive graph in Home/Samples */
+#bars.active span {
+    background-image: url("Images/Samples/bars_active.png");
+}
+
+/* styling 'bars' button on interactive graph in Home/Samples */
+#bars span {
+    background: url("Images/Samples/bars.png") no-repeat center;
+}
+
+/* sets background and alignment for all content */
+body {
+    background-image: url("Images/Backgrounds/blackboard-large.png");
+    background-size: 100%;
+    align-content: center;
+    background-repeat: repeat;
+    margin: 0;
+}
+
+/* main container for all site content */
+.body-content {
+    align-self: center;
+    margin: 9% auto 8% auto;
+    padding: 2%;
+    width: 85%;
+    -webkit-box-shadow: 0 1px 2px rgba(0,0,0,1);
+    -moz-box-shadow: 0 1px 2px rgba(0,0,0,1);
+    box-shadow: 0 1px 2px rgba(0,0,0,1);
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    background: #ffffff;
+    background: -moz-linear-gradient(top, #f9f9f9 0%, #fefefe 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f9f9f9), color-stop(100%,#fefefe));
+    background: -webkit-linear-gradient(top, #f9f9f9 0%,#fefefe 100%);
+    background: -o-linear-gradient(top, #f9f9f9 0%,#fefefe 100%);
+    /*background: -ms-linear-gradient(top, #f9f9f9 0%,#fefefe 100%);*/
+    background: linear-gradient(to bottom, #f9f9f9 0%,#fefefe 100%);
+}
+
+/* sprite sheet and formatting for animation on Home/Samples */
+.bureaucrat-glasses {
+    height: 86px;
+    width: 104px;
+    margin: auto;
+    background: url('Images/Animations/bureaucrat-glasses.png');
+    position: relative;
+    -webkit-animation: playvert 1s steps(3) infinite, playhoriz 1s steps(8) infinite;
+    -moz-animation: playvert 1s steps(3) infinite, playhoriz 1s steps(8) infinite;
+    animation: playvert 1s steps(3) infinite, playhoriz 1s steps(8) infinite;
+}
+
+/* styling inner images in carousel on Home/Samples */
+.carousel-inner img {
+    margin: auto;
+}
+
+/* margins added to prevent page elements from overlapping the site logo */
+.container-logo {
+    margin: 1% auto;
+    padding: 0;
+    text-align: center;
+}
+
+/* centering all content types in content divs */
+.content-all-centered {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* margins added to prevent page elements from overlapping */
+.content-div {
+    margin: 5%;
+}
+
+/* used for browsers using CSS 3+ and flex box, item with fixed size */
+.content-fixed-item {
+    text-align: center;
+}
+
+/* used for browsers using CSS 3+ and flex box */
+.content-flex {
+    display: flex;
+}
+
+/* used for browsers using CSS 3+ and flex box, item with flexible size */
+.content-flex-item {
+    flex-grow: 1;
+    margin: 1%;
+}
+
+/* used for text items next to images in headings */
+.content-flex-item-text {
+    margin-top: 15%;
+    margin-right: 5%;
+    margin-left: 5%;
+}
+
+/* used for single items meant to stretch in the flex continers */
+.content-item-single {
+    width: 60%;
+}
+
+/* used for three item rows in the flex containers */
+.content-item-row-three {
+    width: 20%;
+}
+
+/* used for four item rows in the flex containers */
+.content-item-row-four {
+    width: 15%;
+}
+
+/* used for a single, page-spanning row in the flex containers */
+.content-item-single-row {
+    margin-top: 15%;
+}
+
+.content-label {
+    margin-right: 2%;
+}
+
+.content-table {
+    display: table;
+}
+
+.datepicker {
+    margin: 0;
+    width: auto;
+    height: auto;
+}
+
+dd, dt {
+    margin: 2% 1%;
+}
+
+/* preventing truncation on items in left-most part of list */
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+dl {
+    margin: 1%;
+}
+
+dt {
+    font-size: 20px;
+}
+
+/* styling content tags for blog entries and book reviews */
+.entrytags {
+    border-radius: 10px 0;
+    font-size: 10px;
+}
+
+/* styling the layout footer */
+footer {
+    align-self: center;
+    padding: 1%;
+    display: table-cell;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+}
+
+/* for elements to the left of the footer */
+.footer-left {
+    float: left;
+}
+
+/* for elements to the right of the footer */
+.footer-right {
+    float: right;
+}
+
+/* resetting styles for browser defaults */
+.graph-container,
+.graph-container div,
+.graph-container a,
+.graph-container span {
+    margin: 0;
+    padding: 0;
+}
+
+/* setting gradient and adding rounded corners for graph container, graph tooltips, and graph info links */
+.graph-container, #tooltip, .graph-info a {
+    background: #ffffff;
+    background: -moz-linear-gradient(top, #ffffff 0%, #f9f9f9 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffffff), color-stop(100%,#f9f9f9));
+    background: -webkit-linear-gradient(top, #ffffff 0%,#f9f9f9 100%);
+    background: -o-linear-gradient(top, #ffffff 0%,#f9f9f9 100%);
+    /*background: -ms-linear-gradient(top, #ffffff 0%,#f9f9f9 100%);*/
+    background: linear-gradient(to bottom, #ffffff 0%,#f9f9f9 100%);
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+}
+
+/* graph container formatting */
+.graph-container {
+    position: relative;
+    width: 590px;
+    height: 350px;
+    padding: 0;
+    -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.3);
+    -moz-box-shadow: 0 1px 2px rgba(0,0,0,.3);
+    box-shadow: 0 1px 2px rgba(0,0,0,.3);
+}
+
+/* graph container internal div formatting */
+graph-container > div {
+    position: absolute;
+    width: inherit;
+    height: inherit;
+    top: 10px;
+}
+
+/* graph container top div formatting */
+.graph-info {
+    width: 590px;
+    margin-bottom: 5px;
+}
+
+/* styling graph links */
+.graph-info a {
+    text-align: center;
+    position: relative;
+    display: inline-block;
+    height: 30px;
+    padding: 1% 3% 2% 5%;
+    margin-right: 10px;
+    text-decoration: none;
+    cursor: default;
+}
+
+/* styling graph info circles */
+.graph-info a:before {
+    position: absolute;
+    display: block;
+    content: '';
+    width: 10px;
+    height: 10px;
+    top: 10px;
+    left: 10px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+}
+
+/* styling graph info tabs */
+.graph-info .visitors {
+    border-bottom: 2px solid #ff3240;
+}
+
+.graph-info .returning {
+    border-bottom: 2px solid #15a9e0;
+}
+
+/* styling graph info circle color */
+.graph-info .visitors:before {
+    background: #ff3240;
+}
+
+/* styling graph info circle color */
+.graph-info .returning:before {
+    background: #15a9e0;
+}
+
+/* clearing graph floats */
+.graph-info:before, .graph-info:after,
+.graph-container:before, .graph-container:after {
+    content: '';
+    display: block;
+    clear: both;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea,
+text {
+    max-width: 300px;
+    height: auto;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+}
+
+img {
+    margin: 0;
+    padding: 0;
+}
+
+li {
+    text-decoration-line: none;
+    text-decoration: none;
+}
+
+/* styling line and bar buttons on graph in Home/Samples */
+#lines, #bars {
+    width: 35px;
+    height: 35px;
+    padding: 0;
+    margin-right: 0;
+    margin-left: 10px;
+    border-bottom: 2px solid #036a92;
+    float: right;
+    cursor: pointer;
+}
+
+/* adding image to 'lines' button on graph in Home/Samples */
+#lines span {
+    background: url("Images/Samples/lines.png") no-repeat center;
+}
+
+/* changing background color on both 'lines' and 'bars' buttons on graph in Home/Samples when active */
+#lines.active, #bars.active {
+    background: #3db6e4;
+}
+
+/* adding image to 'lines' button on graph in Home/Samples */
+#lines.active span {
+    background-image: url("Images/Samples/lines_active.png");
+}
+
+/* styling 'lines' and 'bars' button spans on graph in Home/Samples */
+#lines span, #bars span {
+    display: block;
+    width: 34px;
+    height: 32px;
+}
+
+/* adding backgrouns image to the top navbar in Layout */
+.navbar {
+    margin: 0;
+}
+
+.navbar-inverse {
+    color: white;
+}
+
+/* turns off default bootstrap transition effects in order to animate the progress bar */
+.progress-bar {
+    -moz-transition: none;
+    -webkit-transition: none;
+    -o-transition: none;
+    transition: none;
+}
+
+.result-container {
+    margin: 4% auto;
+    width: 80%;
+}
+
+.result-subheading {
+    color: #15a9e0;
+    font-size: 12px;
+    padding-left: 1%;
+    margin: 0;
+}
+
+/* formatting for the search container */
+/*.search-container {
+    margin: 2% auto;
+    width: 70%;
+    padding: 2%;
+    -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.6);
+    -moz-box-shadow: 0 1px 2px rgba(0,0,0,.6);
+    box-shadow: 0 1px 2px rgba(0,0,0,.6);
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    background: #ffffff;
+    background: -moz-linear-gradient(top, #f9f9f9 0%, #fefefe 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f9f9f9), color-stop(100%,#fefefe));
+    background: -webkit-linear-gradient(top, #f9f9f9 0%,#fefefe 100%);
+    background: -o-linear-gradient(top, #f9f9f9 0%,#fefefe 100%);
+    /*background: -ms-linear-gradient(top, #f9f9f9 0%,#fefefe 100%);*/
+    /*background: linear-gradient(to bottom, #f9f9f9 0%,#fefefe 100%);
+}*/
+
+/* changing color of font for subheadings/headings */
+.subheading {
+    color: dodgerblue;
+}
+
+th, td {
+    align-content: center;
+    padding: 10px;
+    margin: 0;
+}
+
+/* styling the axis labels on the graph in Home/Samples */
+.tickLabel {
+    font-weight: bold;
+    font-size: 12px;
+    color: #666;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+/* styling graph text and labels */
+#tooltip, .graph-info a {
+    font-weight: bold;
+    font-size: 12px;
+    line-height: 20px;
+    color: #646464;
+}
+
+/* styling the tooltip */
+#tooltip {
+    position: absolute;
+    display: none;
+    padding: 5px 10px;
+    border: 1px solid #e1e1e1;
+}
+
+ul {
+    list-style-type: none;
+    text-decoration: none;
+    margin: 5px;
+    padding: 0;
+}
+
+/* hiding the first and last labels on the y axis for the interactive graph on Home/Samples */
+.yAxis .tickLabel:first-child,
+.yAxis .tickLabel:last-child {
+    display: none;
+}
+
+/* visibility, size, and position adjustments for very, very small screens */
+@media screen and (min-width: 100px) {
+    .top-nav-list {
+        display: none;
+    }
+    #search-form {
+        display: none;
+    }
+    .illustrations {
+        display: none;
+    }
+    .site-logo-large {
+        display: none;
+    }
+    .site-logo-small {
+        display: none;
+    }
+    .site-logo-mobile {
+        display: none;
+    }
+    .large-error-illustration {
+        display: none;
+    }
+    .small-error-illustration {
+        display: none;
+    }
+    #warning-message {
+        display: inline;
+    }
+}
+
+/* visibility, size, and position adjustments for smartphones */
+@media screen and (min-width: 320px) {
+    .illustrations {
+        display: none;
+    }
+    .site-logo-large {
+        display: none;
+    }
+    .site-logo-small {
+        display: none;
+    }
+    .site-logo-mobile {
+        display: block;
+    }
+    .top-nav-list {
+        display: none;
+    }
+    #search-form {
+        display: none;
+    }
+    .large-error-illustration {
+        display: none;
+    }
+    .small-error-illustration {
+        display: block;
+    }
+    #warning-message {
+        display: inline;
+    }
+}
+
+/* size and position adjustments for medium mobile devices */
+@media screen and (min-width: 600px) {
+    .illustrations {
+        display: none;
+    }
+    .site-logo-large {
+        display: none;
+    }
+    .site-logo-small {
+        display: block;
+    }
+    .site-logo-mobile {
+        display: none;
+    }
+    .top-nav-list {
+        display: none;
+    }
+    #search-form {
+        display: none;
+    }
+    .large-error-illustration {
+        display: none;
+    }
+    .small-error-illustration {
+        display: block;
+    }
+    #warning-message {
+        display: inline;
+    }
+}
+
+/* size and position adjustments for desktop devices */
+@media screen and (min-width: 1025px) {
+    .illustrations {
+        text-align: center;
+        display: inline-block;
+    }
+    .top-nav-list {
+        display: inline;
+    }
+    #search-form {
+        display: inline;
+    }
+    .site-logo-large {
+        display: block;
+    }
+    .site-logo-small {
+        display: none;
+    }
+    .site-logo-mobile {
+        display: none;
+    }
+    .large-error-illustration {
+        display: block;
+    }
+    .small-error-illustration {
+        display: none;
+    }
+    #warning-message {
+        display: none;
+    }
+}
+
+/* for animation in Samples, sheet is 780px wide and 144px high */
+/* for vertical progression on sprite sheet, browser w/webkit */
+@-webkit-keyframes playvert {
+    0% {
+        background-position-y: 0;
+    }
+
+    100% {
+        background-position-y: -267px;
+    }
+}
+
+/* for horizontal progression on sprite sheet, browser w/webkit */
+@-webkit-keyframes playhoriz {
+    0% {
+        background-position-x: 0;
+    }
+
+    100% {
+        background-position-x: -816px;
+    }
+}
+
+/* for vertical progression on sprite sheet, browser w/out webkit */
+@keyframes playvert {
+    0% {
+        background-position-y: 0;
+    }
+
+    100% {
+        background-position-y: -267px;
+    }
+}
+
+/* for horizontal progression on sprite sheet, browser w/out webkit */
+@keyframes playhoriz {
+    0% {
+        background-position-x: 0;
+    }
+
+    100% {
+        background-position-x: -816px;
+    }
+}

@@ -1,0 +1,53 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<!-- site logos -->
+<div class="container-logo site-logo-large">
+    <img src='@Url.Content("/Content/Images/Site Logos/blackboard-site-logo.png")' />
+</div>
+<div class="container-logo site-logo-small">
+    <img src='@Url.Content("/Content/Images/Site Logos/blackboard-site-logo-small.png")' />
+</div>
+<div class="container-logo site-logo-mobile">
+    <img src='@Url.Content("/Content/Images/Site Logos/blackboard-site-mobile-logo.png")' />
+</div>
+<!-- divs for links and pictures -->
+<div class="content-div">
+    <!-- top row-->
+    <div class="content-flex">
+        <div class="content-flex-item content-item-row-three">           
+            <a href='@Url.Action("Index", "Blogs", null)' aria-labelledby="Blog"><h3>Blog</h3></a>
+            <p>Entries on various topics in back end and web development, mathematics, algorithms, small business, and computer science.</p>
+            <a href='@Url.Action("Index", "Blogs", null)' aria-labelledby="Blog" style="text-align: center;"><img class="illustrations" src='@Url.Content("/Content/Images/General/skullandcrossbones.png")' /></a>
+        </div>
+        <div class="content-flex-item content-item-row-three">
+            <a href='#' aria-describedby="Learning Links"><img class="illustrations" src='@Url.Content("/Content/Images/General/shadow-puppet.png")' /></a>
+            <a href='#' aria-describedby="Learning Links"><h3>Teach me</h3></a>
+            <p>Section under construction. Coming features include a regular expressions calculator, and a drag and drop interface for creating finite automata.</p>
+        </div>
+        <div class="content-flex-item content-item-row-three">
+            <a href='@Url.Action("HireMe", "Home", null)' aria-labelledby="Prices"><h3>Hire me</h3></a>
+            <p>Pricing information and conditions.</p>
+            <a href='@Url.Action("HireMe", "Home", null)' aria-labelledby="Prices"><img class="illustrations" src='@Url.Content("/Content/Images/General/hats-off.png")' /></a>
+        </div>
+    </div>
+    <!-- bottom row -->
+    <div class="content-flex">
+        <div class="content-flex-item content-item-row-three">
+            <a href='@Url.Action("Index", "Articles", null)' aria-labelledby="Research Articles"><h3>Research</h3></a>
+            <p>A series of short essays on what research is, how it is performed, and how it is interpreted, with regard to computer science and security.</p>
+            <a href='@Url.Action("Index", "Articles", null)' aria-labelledby="Research Articles"><img class="illustrations" src='@Url.Content("/Content/Images/General/hand-torch.png")' /></a>
+        </div>
+        <div class="content-flex-item content-item-row-three">
+            <a href='@Url.Action("Index", "Recommendations", null)' aria-labelledby="Good Reads"><img class="illustrations" src='@Url.Content("/Content/Images/General/tiptoeing-elephant.png")' /></a>
+            <a href='@Url.Action("Index", "Recommendations", null)' aria-labelledby="Good Reads"><h3>Good Reads</h3></a>
+            <p>An ongoing list of book and/or article recommendations in fields ranging from computer science topics to business.</p>
+        </div>
+        <div class="content-flex-item content-item-row-three">
+            <a href='@Url.Action("SelfTeach", "Articles", null)' aria-labelledby="Advice on Self Teaching"><h3>Advice on Self Teaching</h3></a>
+            <p>A short article about teaching yourself, including advice on how to organize self-learning projects.</p>
+            <a href='@Url.Action("SelfTeach", "Articles", null)' aria-labelledby="Advice on Self Teaching"><img class="illustrations" src='@Url.Content("/Content/Images/General/knight-sliding.png")' /></a>
+        </div>
+    </div>
+</div>

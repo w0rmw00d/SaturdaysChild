@@ -1,0 +1,28 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+
+<div class="content-div content-all-centered">
+    <div class="content-flex content-item-single-row">
+        <div class="content-flex-item content-item-row-four">
+            <a href='@Url.Action("HowToResearch", "Articles", null)' aria-labelledby="how to research" style="text-align: center;"><img class="illustrations" title="'Scenes de la privee et publique des animaux,' JJ Grandville (1842)" src='@Url.Content("/Content/Images/General/lion-in-suit.png")' /></a>
+            <a href='@Url.Action("HowToResearch", "Articles", null)' aria-labelledby="how to research"><h3>How is Research Done?</h3></a>
+            <p>A short article on how some kinds of security and computer science research are done.</p>
+        </div>
+        <div class="content-flex-item content-item-row-four">
+            <a href='@Url.Action("ResearchAndSecurity", "Articles", null)' aria-labelledby="research and security"><h3>Research and Security</h3></a>
+            <p>A short article on how research impacts security.</p>
+            <a href='@Url.Action("ResearchAndSecurity", "Articles", null)' aria-labelledby="research and security" style="text-align: center;"><img class="illustrations" title="'Scenes de la privee et publique des animaux,' JJ Grandville (1842)" src='@Url.Content("/Content/Images/General/fox-as-swindler.png")' /></a>
+        </div>
+        <div class="content-flex-item content-item-row-four">
+            <a href='@Url.Action("SelfTeach", "Articles", null)' aria-labelledby="teaching yourself" style="text-align: center;"><img class="illustrations" title="'Scenes de la privee et publique des animaux,' JJ Grandville (1842)" src='@Url.Content("/Content/Images/General/rooster-in-suit.png")' /></a>
+            <a href='@Url.Action("SelfTeach", "Articles", null)' aria-labelledby="teaching yourself"><h3>Advice on Teaching Yourself</h3></a>
+            <p>A short article on teaching yourself topics in computer science.</p>
+        </div>
+        <div class="content-flex-item content-item-row-four">
+            <a href='@Url.Action("WhatIsResearch", "Articles", null)' aria-labelledby="Blog"><h3>What is Research?</h3></a>
+            <p>A short article defining research and the goals of research on human populations.</p>
+            <a href='@Url.Action("WhatIsResearch", "Articles", null)' aria-labelledby="Blog" style="text-align: center;"><img class="illustrations" title="'Scenes de la privee et publique des animaux,' JJ Grandville (1842)" src='@Url.Content("/Content/Images/General/nervous-rabbit.png")' /></a>
+        </div>
+    </div>
+</div>

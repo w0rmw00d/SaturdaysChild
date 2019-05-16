@@ -1,0 +1,64 @@
+﻿@model SaturdaysChild.Models.ViewModels.SearchViewModel
+
+@{
+    ViewBag.Title = "Search";
+}
+
+@section scripts {
+    <link rel="stylesheet" href="~/Content/themes/base/jquery-ui.min.css" type="text/css" />
+    <script type="text/javascript" src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+}
+
+@using (@Html.BeginForm("Search", "Home", FormMethod.Post))
+{
+    <div class="content-div" style="margin-bottom: 8%;">
+        <!-- first row, search string -->
+        <div class="search-container" style="margin-top: 7%;">
+            <div class="content-flex content-flex-item">
+                <h4 class="subheading">Search For</h4>
+            </div>
+            <div class="content-flex">
+                <div class="content-flex-item">
+                    @Html.TextBoxFor(model => model.SearchString, new { @class = "content-item-single", @autocomplete = "on", @spellcheck = "on" })
+                    <button type="submit" class="btn btn-default" aria-labelledby="submit search">
+                        <span class="glyphicon glyphicon-search" />
+                    </button>
+                </div>
+            </div>
+            <div class="content-flex content-flex-item">
+                <p>Note: the default search uses all fields. Specific fields may be chosen in lieu of the default search.</p>
+            </div>
+        </div>
+        <!-- second row, author and type -->
+        <div class="search-container">
+            <div class="content-flex content-flex-item">
+                <h4 class="subheading">Filter By Author and Type</h4>
+            </div>
+            <div class="content-flex">
+                <div class="content-flex-item">
+                    @Html.LabelFor(model => model.Author)
+                    @Html.DropDownListFor(model => model.Author, new SelectList(Model.AuthorList, null))
+                </div>
+                <div class="content-flex-item">
+                    @Html.LabelFor(model => model.Type)
+                    @Html.DropDownListFor(model => model.Type, new SelectList(Model.TypeList, null))
+                </div>
+            </div>
+        </div>
+        <!-- third row, topics -->
+        <div class="search-container">
+            <div class="content-flex">
+                <h4 class="subheading">Filter By Tags</h4>
+            </div>
+            <div class="content-flex content-flex-item">
+                @Html.EditorFor(model => model.Tags, new { @class = "content-item-single", @spellcheck = "true", @autocomplete = "on" })
+            </div>
+            <div class="content-flex">
+                <p>Note: topics should be separated with a comma.</p>
+            </div>
+        </div> 
+        <div class="illustrations pull-right" style="margin-top: 2%;">
+            <span><strong>Powered by: </strong><img class="illustrations" src='@Url.Content("~/Content/Images/Icons/lucene-logo.png")' /></span>
+        </div>
+    </div>
+}

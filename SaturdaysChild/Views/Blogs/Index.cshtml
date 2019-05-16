@@ -1,0 +1,42 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+
+<div class="content-div content-all-centered">
+    <div class="content-flex">
+        <div class="content-flex-item">
+            <img src='@Url.Content("/Content/Images/Errors/bird-in-suit.png")' />
+        </div>
+    </div>
+    <div class="content-flex">
+        <div class="content-flex-item">
+            <h2>Coming soon</h2>
+        </div>
+    </div>
+    @*<!-- first row, success/failure/error messages -->
+        @if (!string.IsNullOrEmpty(@ViewBag.IndexMessage)) {
+            <div class="content-flex">
+                <div class="content-flex-item">
+                    @ViewBag.IndexMessage
+                </div>
+            </div>
+        }
+        <!-- second row, navigation buttons -->
+        <div class="content-flex">
+            <div class="content-flex">
+                <div class="content-flex-item">
+                    <a href="#"><img src="" /></a>
+                    <h2>Add Blog</h2>
+                </div>
+                <div class="content-flex-item">
+                    <h2>Edit Blog</h2>
+                    <a href="#"><img src="" /></a>
+                </div>
+                <div class="content-flex-item">
+                    <a href="#"><img src="" /></a>
+                    <h2>Find Blog</h2>
+                </div>
+            </div>
+        </div>*@
+</div>
+

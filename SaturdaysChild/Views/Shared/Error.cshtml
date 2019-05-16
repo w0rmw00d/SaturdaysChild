@@ -1,0 +1,17 @@
+﻿@model System.Web.Mvc.HandleErrorInfo
+
+@{
+    ViewBag.Title = "Error";
+}
+
+<div class="body-content">
+    <div class="content-flex">
+        <div class="content-flex-item"><img class="large-error-illustration" src='@Url.Content("/Content/Images/Errors/question-in-frame-large.png")' /></div>
+        <div class="content-flex-item"><img class="small-error-illustration" src='@Url.Content("/Content/Images/Errors/question-in-frame-small.png")' /></div>
+    </div>
+    <div class="content-flex">
+        <div class="content-flex-item">
+            <h2 class="text-danger">Uh-oh. You've triggered the robot apocalypse.</h2>
+        </div>
+    </div>
+</div>

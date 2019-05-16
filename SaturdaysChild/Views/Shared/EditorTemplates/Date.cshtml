@@ -1,0 +1,23 @@
+﻿@model DateTime?
+
+<div class="input-group">
+    @Html.TextBox("", Model.HasValue ? Model.Value.ToUniversalTime().ToShortDateString() : null, new { @class = "datepicker" })
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#@Html.IdForModel()').datepicker({
+            changeMonth: true,
+            changeYear: true,
+            showOn: "button",
+            showButtonPanel: true,
+            buttonImage: "/Content/Images/Icons/glyphicons-calendar.png",
+            buttonImageOnly: false,
+            buttonText: "select a date",
+            closeText: "close",
+            maxDate: "+0d",
+            minDate: "-10d",
+            
+        });
+    });
+</script>

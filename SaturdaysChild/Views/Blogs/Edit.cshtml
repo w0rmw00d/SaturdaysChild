@@ -1,0 +1,41 @@
+﻿@model SaturdaysChild.Models.ViewModels.EditBlogViewModel
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+@using (Html.BeginForm("Edit", "Blog", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(a => a.Id)
+
+    <div class="content-div">
+        <table>
+            <tr>
+                <th>@Html.LabelFor(a => a.EntryDate)</th>
+                <td>@Html.EditorFor(a => a.EntryDate)</td>
+            </tr>
+            <tr>
+                <th>@Html.LabelFor(a => a.Author)</th>
+                <td>@Html.EditorFor(a => a.Author)</td>
+            </tr>
+            <tr>
+                <th>@Html.LabelFor(a => a.Title)</th>
+                <td>@Html.EditorFor(a => a.Title)</td>
+            </tr>
+            <tr>
+                <th>@Html.LabelFor(a => a.Entry)</th>
+                <td>@Html.EditorFor(a => a.Entry)</td>
+            </tr>
+            <tr>
+                <th>@Html.LabelFor(a => a.Tags)</th>
+                <td>@Html.EditorFor(a => a.Tags)</td>
+            </tr>
+            <tr>
+                <th></th>
+                <td><input class="pull-right" type="submit" value="Send" /></td>
+            </tr>
+        </table>
+    </div>
+}
+

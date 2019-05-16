@@ -1,0 +1,1346 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="SaturdaysChildDbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AuditItems">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Date" Type="datetime" Nullable="false" />
+          <Property Name="EmployeeId" Type="int" Nullable="false" />
+          <Property Name="TableName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="EntryId" Type="int" Nullable="false" />
+          <Property Name="OldValue" Type="varchar(max)" Nullable="false" />
+          <Property Name="NewValue" Type="varchar(max)" Nullable="false" />
+          <Property Name="IPAddress" Type="binary" MaxLength="4" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Blogs">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="EntryDate" Type="datetime" Nullable="false" />
+          <Property Name="AuthorId" Type="int" Nullable="false" />
+          <Property Name="Author" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Title" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="Entry" Type="varchar(max)" Nullable="false" />
+          <Property Name="Tags" Type="varchar" MaxLength="250" Nullable="false" />
+        </EntityType>
+        <EntityType Name="BugReports">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="BugTime" Type="datetime" Nullable="false" />
+          <Property Name="BugType" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="BugDescription" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="Clients">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="InternalId" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="Address" Type="varchar" MaxLength="200" />
+          <Property Name="ContactEmail" Type="varchar" MaxLength="50" />
+          <Property Name="AccountEmails" Type="varchar(max)" />
+          <Property Name="Phone" Type="varchar" MaxLength="12" />
+          <Property Name="ContactHours" Type="int" />
+          <Property Name="LastContact" Type="datetime" />
+          <Property Name="Notes" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="Contracts">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Title" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="InternalId" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="ClientId" Type="int" Nullable="false" />
+          <Property Name="StartDate" Type="datetime" />
+          <Property Name="EndDate" Type="datetime" />
+          <Property Name="TotalAmount" Type="decimal" Precision="6" Scale="2" />
+          <Property Name="TotalHours" Type="int" />
+          <Property Name="Notes" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="Employees">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="InternalId" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Address" Type="varchar" MaxLength="100" />
+          <Property Name="Email" Type="varchar" MaxLength="50" />
+          <Property Name="Phone" Type="varchar" MaxLength="12" />
+          <Property Name="Type" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="RequiredHours" Type="int" Nullable="false" />
+          <Property Name="Pay" Type="int" Nullable="false" />
+          <Property Name="Notes" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="Invoices">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="InternalId" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="ClientId" Type="int" Nullable="false" />
+          <Property Name="ContractId" Type="int" Nullable="false" />
+          <Property Name="DateIssued" Type="datetime" Nullable="false" />
+          <Property Name="StartDate" Type="datetime" Nullable="false" />
+          <Property Name="EndDate" Type="datetime" />
+          <Property Name="Amount" Type="decimal" Precision="6" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LaborCategories">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Title" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="ContractId" Type="int" Nullable="false" />
+          <Property Name="Description" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="LaborTypes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Title" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="CategoryId" Type="int" Nullable="false" />
+          <Property Name="Description" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="MemberMessages">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Date" Type="datetime" />
+          <Property Name="Alert" Type="varchar" MaxLength="50" />
+          <Property Name="MemberName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Message" Type="varchar(max)" Nullable="false" />
+          <Property Name="From" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="IsEmployee" Type="bit" Nullable="false" />
+          <Property Name="IsRead" Type="bit" Nullable="false" />
+          <Property Name="ReadDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Recommendations">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Author" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="AuthorId" Type="int" Nullable="false" />
+          <Property Name="RecommendationDate" Type="datetime" Nullable="false" />
+          <Property Name="RecommendationTitle" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="RecommendationAuthor" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="RecommendationLink" Type="varchar" MaxLength="300" />
+          <Property Name="Title" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="Entry" Type="varchar(max)" Nullable="false" />
+          <Property Name="Tags" Type="varchar" MaxLength="250" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SiteAccess">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Psuedonym" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Login" Type="datetime" Nullable="false" />
+          <Property Name="Logout" Type="datetime" />
+          <Property Name="IPAddress" Type="binary" MaxLength="4" />
+          <Property Name="MACAddress" Type="varchar" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="SupportTickets">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="EmpId" Type="int" Nullable="false" />
+          <Property Name="ClientId" Type="int" Nullable="false" />
+          <Property Name="ContractId" Type="int" Nullable="false" />
+          <Property Name="ContactName" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="Contact" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="TicketStart" Type="datetime" Nullable="false" />
+          <Property Name="TicketEnd" Type="datetime" />
+          <Property Name="Notes" Type="varchar(max)" />
+          <Property Name="BugId" Type="int" />
+        </EntityType>
+        <EntityType Name="Timesheets">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="InternalId" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="ContractId" Type="int" Nullable="false" />
+          <Property Name="InvoiceId" Type="int" Nullable="false" />
+          <Property Name="EmployeeId" Type="int" Nullable="false" />
+          <Property Name="StartDate" Type="datetime" Nullable="false" />
+          <Property Name="EndDate" Type="datetime" />
+          <Property Name="TotalHours" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="WorkItems">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="EmployeeId" Type="int" Nullable="false" />
+          <Property Name="ContractId" Type="int" Nullable="false" />
+          <Property Name="TimesheetId" Type="int" />
+          <Property Name="LaborCategoryId" Type="int" Nullable="false" />
+          <Property Name="LaborTypeId" Type="int" Nullable="false" />
+          <Property Name="WorkSite" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Billed" Type="bit" Nullable="false" />
+          <Property Name="Hours" Type="int" Nullable="false" />
+          <Property Name="Description" Type="varchar(max)" />
+        </EntityType>
+        <Association Name="FK__AuditItem__Emplo__403A8C7D">
+          <End Role="Employees" Type="Self.Employees" Multiplicity="1" />
+          <End Role="AuditItems" Type="Self.AuditItems" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employees">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AuditItems">
+              <PropertyRef Name="EmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Blogs__AuthorId__412EB0B6">
+          <End Role="Employees" Type="Self.Employees" Multiplicity="1" />
+          <End Role="Blogs" Type="Self.Blogs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employees">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Blogs">
+              <PropertyRef Name="AuthorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Contracts__Clien__4222D4EF">
+          <End Role="Clients" Type="Self.Clients" Multiplicity="1" />
+          <End Role="Contracts" Type="Self.Contracts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Contracts">
+              <PropertyRef Name="ClientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Invoices__Client__440B1D61">
+          <End Role="Clients" Type="Self.Clients" Multiplicity="1" />
+          <End Role="Invoices" Type="Self.Invoices" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Invoices">
+              <PropertyRef Name="ClientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Invoices__Contra__4316F928">
+          <End Role="Contracts" Type="Self.Contracts" Multiplicity="1" />
+          <End Role="Invoices" Type="Self.Invoices" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Contracts">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Invoices">
+              <PropertyRef Name="ContractId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__LaborCate__Contr__44FF419A">
+          <End Role="Contracts" Type="Self.Contracts" Multiplicity="1" />
+          <End Role="LaborCategories" Type="Self.LaborCategories" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Contracts">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="LaborCategories">
+              <PropertyRef Name="ContractId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__LaborType__Categ__45F365D3">
+          <End Role="LaborCategories" Type="Self.LaborCategories" Multiplicity="1" />
+          <End Role="LaborTypes" Type="Self.LaborTypes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LaborCategories">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="LaborTypes">
+              <PropertyRef Name="CategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Recommend__Autho__46E78A0C">
+          <End Role="Employees" Type="Self.Employees" Multiplicity="1" />
+          <End Role="Recommendations" Type="Self.Recommendations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employees">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Recommendations">
+              <PropertyRef Name="AuthorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SupportTi__BugId__73852659">
+          <End Role="BugReports" Type="Self.BugReports" Multiplicity="0..1" />
+          <End Role="SupportTickets" Type="Self.SupportTickets" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BugReports">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SupportTickets">
+              <PropertyRef Name="BugId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SupportTi__Clien__49C3F6B7">
+          <End Role="Clients" Type="Self.Clients" Multiplicity="1" />
+          <End Role="SupportTickets" Type="Self.SupportTickets" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SupportTickets">
+              <PropertyRef Name="ClientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SupportTi__Contr__47DBAE45">
+          <End Role="Contracts" Type="Self.Contracts" Multiplicity="1" />
+          <End Role="SupportTickets" Type="Self.SupportTickets" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Contracts">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SupportTickets">
+              <PropertyRef Name="ContractId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SupportTi__EmpId__48CFD27E">
+          <End Role="Employees" Type="Self.Employees" Multiplicity="1" />
+          <End Role="SupportTickets" Type="Self.SupportTickets" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employees">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SupportTickets">
+              <PropertyRef Name="EmpId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Timesheet__Contr__4AB81AF0">
+          <End Role="Contracts" Type="Self.Contracts" Multiplicity="1" />
+          <End Role="Timesheets" Type="Self.Timesheets" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Contracts">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Timesheets">
+              <PropertyRef Name="ContractId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Timesheet__Emplo__4CA06362">
+          <End Role="Employees" Type="Self.Employees" Multiplicity="1" />
+          <End Role="Timesheets" Type="Self.Timesheets" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employees">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Timesheets">
+              <PropertyRef Name="EmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Timesheet__Invoi__4BAC3F29">
+          <End Role="Invoices" Type="Self.Invoices" Multiplicity="1" />
+          <End Role="Timesheets" Type="Self.Timesheets" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Invoices">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Timesheets">
+              <PropertyRef Name="InvoiceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__WorkItems__Contr__4E88ABD4">
+          <End Role="Contracts" Type="Self.Contracts" Multiplicity="1" />
+          <End Role="WorkItems" Type="Self.WorkItems" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Contracts">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="WorkItems">
+              <PropertyRef Name="ContractId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__WorkItems__Emplo__5165187F">
+          <End Role="Employees" Type="Self.Employees" Multiplicity="1" />
+          <End Role="WorkItems" Type="Self.WorkItems" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employees">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="WorkItems">
+              <PropertyRef Name="EmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__WorkItems__Labor__4F7CD00D">
+          <End Role="LaborCategories" Type="Self.LaborCategories" Multiplicity="1" />
+          <End Role="WorkItems" Type="Self.WorkItems" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LaborCategories">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="WorkItems">
+              <PropertyRef Name="LaborCategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__WorkItems__Labor__5070F446">
+          <End Role="LaborTypes" Type="Self.LaborTypes" Multiplicity="1" />
+          <End Role="WorkItems" Type="Self.WorkItems" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LaborTypes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="WorkItems">
+              <PropertyRef Name="LaborTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__WorkItems__Times__4D94879B">
+          <End Role="Timesheets" Type="Self.Timesheets" Multiplicity="0..1" />
+          <End Role="WorkItems" Type="Self.WorkItems" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Timesheets">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="WorkItems">
+              <PropertyRef Name="TimesheetId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="SaturdaysChildDbModelStoreContainer">
+          <EntitySet Name="AuditItems" EntityType="Self.AuditItems" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Blogs" EntityType="Self.Blogs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BugReports" EntityType="Self.BugReports" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Clients" EntityType="Self.Clients" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Contracts" EntityType="Self.Contracts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Employees" EntityType="Self.Employees" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Invoices" EntityType="Self.Invoices" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LaborCategories" EntityType="Self.LaborCategories" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LaborTypes" EntityType="Self.LaborTypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MemberMessages" EntityType="Self.MemberMessages" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Recommendations" EntityType="Self.Recommendations" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SiteAccess" EntityType="Self.SiteAccess" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SupportTickets" EntityType="Self.SupportTickets" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Timesheets" EntityType="Self.Timesheets" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WorkItems" EntityType="Self.WorkItems" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__AuditItem__Emplo__403A8C7D" Association="Self.FK__AuditItem__Emplo__403A8C7D">
+            <End Role="Employees" EntitySet="Employees" />
+            <End Role="AuditItems" EntitySet="AuditItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Blogs__AuthorId__412EB0B6" Association="Self.FK__Blogs__AuthorId__412EB0B6">
+            <End Role="Employees" EntitySet="Employees" />
+            <End Role="Blogs" EntitySet="Blogs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Contracts__Clien__4222D4EF" Association="Self.FK__Contracts__Clien__4222D4EF">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="Contracts" EntitySet="Contracts" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Invoices__Client__440B1D61" Association="Self.FK__Invoices__Client__440B1D61">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="Invoices" EntitySet="Invoices" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Invoices__Contra__4316F928" Association="Self.FK__Invoices__Contra__4316F928">
+            <End Role="Contracts" EntitySet="Contracts" />
+            <End Role="Invoices" EntitySet="Invoices" />
+          </AssociationSet>
+          <AssociationSet Name="FK__LaborCate__Contr__44FF419A" Association="Self.FK__LaborCate__Contr__44FF419A">
+            <End Role="Contracts" EntitySet="Contracts" />
+            <End Role="LaborCategories" EntitySet="LaborCategories" />
+          </AssociationSet>
+          <AssociationSet Name="FK__LaborType__Categ__45F365D3" Association="Self.FK__LaborType__Categ__45F365D3">
+            <End Role="LaborCategories" EntitySet="LaborCategories" />
+            <End Role="LaborTypes" EntitySet="LaborTypes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Recommend__Autho__46E78A0C" Association="Self.FK__Recommend__Autho__46E78A0C">
+            <End Role="Employees" EntitySet="Employees" />
+            <End Role="Recommendations" EntitySet="Recommendations" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SupportTi__BugId__73852659" Association="Self.FK__SupportTi__BugId__73852659">
+            <End Role="BugReports" EntitySet="BugReports" />
+            <End Role="SupportTickets" EntitySet="SupportTickets" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SupportTi__Clien__49C3F6B7" Association="Self.FK__SupportTi__Clien__49C3F6B7">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="SupportTickets" EntitySet="SupportTickets" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SupportTi__Contr__47DBAE45" Association="Self.FK__SupportTi__Contr__47DBAE45">
+            <End Role="Contracts" EntitySet="Contracts" />
+            <End Role="SupportTickets" EntitySet="SupportTickets" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SupportTi__EmpId__48CFD27E" Association="Self.FK__SupportTi__EmpId__48CFD27E">
+            <End Role="Employees" EntitySet="Employees" />
+            <End Role="SupportTickets" EntitySet="SupportTickets" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Timesheet__Contr__4AB81AF0" Association="Self.FK__Timesheet__Contr__4AB81AF0">
+            <End Role="Contracts" EntitySet="Contracts" />
+            <End Role="Timesheets" EntitySet="Timesheets" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Timesheet__Emplo__4CA06362" Association="Self.FK__Timesheet__Emplo__4CA06362">
+            <End Role="Employees" EntitySet="Employees" />
+            <End Role="Timesheets" EntitySet="Timesheets" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Timesheet__Invoi__4BAC3F29" Association="Self.FK__Timesheet__Invoi__4BAC3F29">
+            <End Role="Invoices" EntitySet="Invoices" />
+            <End Role="Timesheets" EntitySet="Timesheets" />
+          </AssociationSet>
+          <AssociationSet Name="FK__WorkItems__Contr__4E88ABD4" Association="Self.FK__WorkItems__Contr__4E88ABD4">
+            <End Role="Contracts" EntitySet="Contracts" />
+            <End Role="WorkItems" EntitySet="WorkItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK__WorkItems__Emplo__5165187F" Association="Self.FK__WorkItems__Emplo__5165187F">
+            <End Role="Employees" EntitySet="Employees" />
+            <End Role="WorkItems" EntitySet="WorkItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK__WorkItems__Labor__4F7CD00D" Association="Self.FK__WorkItems__Labor__4F7CD00D">
+            <End Role="LaborCategories" EntitySet="LaborCategories" />
+            <End Role="WorkItems" EntitySet="WorkItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK__WorkItems__Labor__5070F446" Association="Self.FK__WorkItems__Labor__5070F446">
+            <End Role="LaborTypes" EntitySet="LaborTypes" />
+            <End Role="WorkItems" EntitySet="WorkItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK__WorkItems__Times__4D94879B" Association="Self.FK__WorkItems__Times__4D94879B">
+            <End Role="Timesheets" EntitySet="Timesheets" />
+            <End Role="WorkItems" EntitySet="WorkItems" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="SaturdaysChildDbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="AuditItem">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="EmployeeId" Type="Int32" Nullable="false" />
+          <Property Name="TableName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="EntryId" Type="Int32" Nullable="false" />
+          <Property Name="OldValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="NewValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="IPAddress" Type="Binary" MaxLength="4" FixedLength="true" Nullable="false" />
+          <NavigationProperty Name="Employee" Relationship="Self.FK__AuditItem__Emplo__403A8C7D" FromRole="AuditItems" ToRole="Employees" />
+        </EntityType>
+        <EntityType Name="Blog">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="EntryDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="AuthorId" Type="Int32" Nullable="false" />
+          <Property Name="Author" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Title" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Entry" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Tags" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Employee" Relationship="Self.FK__Blogs__AuthorId__412EB0B6" FromRole="Blogs" ToRole="Employees" />
+        </EntityType>
+        <EntityType Name="BugReport">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="BugTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="BugType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="BugDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="SupportTickets" Relationship="SaturdaysChildDbModel.FK__SupportTi__BugId__73852659" FromRole="BugReport" ToRole="SupportTicket" />
+        </EntityType>
+        <EntityType Name="Client">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="InternalId" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Address" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="ContactEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AccountEmails" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Phone" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Name="ContactHours" Type="Int32" />
+          <Property Name="LastContact" Type="DateTime" Precision="3" />
+          <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Contracts" Relationship="Self.FK__Contracts__Clien__4222D4EF" FromRole="Clients" ToRole="Contracts" />
+          <NavigationProperty Name="Invoices" Relationship="Self.FK__Invoices__Client__440B1D61" FromRole="Clients" ToRole="Invoices" />
+          <NavigationProperty Name="SupportTickets" Relationship="Self.FK__SupportTi__Clien__49C3F6B7" FromRole="Clients" ToRole="SupportTickets" />
+        </EntityType>
+        <EntityType Name="Contract">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Title" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="InternalId" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ClientId" Type="Int32" Nullable="false" />
+          <Property Name="StartDate" Type="DateTime" Precision="3" />
+          <Property Name="EndDate" Type="DateTime" Precision="3" />
+          <Property Name="TotalAmount" Type="Decimal" Precision="6" Scale="2" />
+          <Property Name="TotalHours" Type="Int32" />
+          <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Client" Relationship="Self.FK__Contracts__Clien__4222D4EF" FromRole="Contracts" ToRole="Clients" />
+          <NavigationProperty Name="Invoices" Relationship="Self.FK__Invoices__Contra__4316F928" FromRole="Contracts" ToRole="Invoices" />
+          <NavigationProperty Name="LaborCategories" Relationship="Self.FK__LaborCate__Contr__44FF419A" FromRole="Contracts" ToRole="LaborCategories" />
+          <NavigationProperty Name="SupportTickets" Relationship="Self.FK__SupportTi__Contr__47DBAE45" FromRole="Contracts" ToRole="SupportTickets" />
+          <NavigationProperty Name="Timesheets" Relationship="Self.FK__Timesheet__Contr__4AB81AF0" FromRole="Contracts" ToRole="Timesheets" />
+          <NavigationProperty Name="WorkItems" Relationship="Self.FK__WorkItems__Contr__4E88ABD4" FromRole="Contracts" ToRole="WorkItems" />
+        </EntityType>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="InternalId" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Address" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Phone" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Name="Type" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="RequiredHours" Type="Int32" Nullable="false" />
+          <Property Name="Pay" Type="Int32" Nullable="false" />
+          <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="AuditItems" Relationship="Self.FK__AuditItem__Emplo__403A8C7D" FromRole="Employees" ToRole="AuditItems" />
+          <NavigationProperty Name="Blogs" Relationship="Self.FK__Blogs__AuthorId__412EB0B6" FromRole="Employees" ToRole="Blogs" />
+          <NavigationProperty Name="Recommendations" Relationship="Self.FK__Recommend__Autho__46E78A0C" FromRole="Employees" ToRole="Recommendations" />
+          <NavigationProperty Name="SupportTickets" Relationship="Self.FK__SupportTi__EmpId__48CFD27E" FromRole="Employees" ToRole="SupportTickets" />
+          <NavigationProperty Name="Timesheets" Relationship="Self.FK__Timesheet__Emplo__4CA06362" FromRole="Employees" ToRole="Timesheets" />
+          <NavigationProperty Name="WorkItems" Relationship="Self.FK__WorkItems__Emplo__5165187F" FromRole="Employees" ToRole="WorkItems" />
+        </EntityType>
+        <EntityType Name="Invoice">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="InternalId" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ClientId" Type="Int32" Nullable="false" />
+          <Property Name="ContractId" Type="Int32" Nullable="false" />
+          <Property Name="DateIssued" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="EndDate" Type="DateTime" Precision="3" />
+          <Property Name="Amount" Type="Decimal" Precision="6" Scale="2" Nullable="false" />
+          <NavigationProperty Name="Client" Relationship="Self.FK__Invoices__Client__440B1D61" FromRole="Invoices" ToRole="Clients" />
+          <NavigationProperty Name="Contract" Relationship="Self.FK__Invoices__Contra__4316F928" FromRole="Invoices" ToRole="Contracts" />
+          <NavigationProperty Name="Timesheets" Relationship="Self.FK__Timesheet__Invoi__4BAC3F29" FromRole="Invoices" ToRole="Timesheets" />
+        </EntityType>
+        <EntityType Name="LaborCategory">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Title" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ContractId" Type="Int32" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Contract" Relationship="Self.FK__LaborCate__Contr__44FF419A" FromRole="LaborCategories" ToRole="Contracts" />
+          <NavigationProperty Name="LaborTypes" Relationship="Self.FK__LaborType__Categ__45F365D3" FromRole="LaborCategories" ToRole="LaborTypes" />
+          <NavigationProperty Name="WorkItems" Relationship="Self.FK__WorkItems__Labor__4F7CD00D" FromRole="LaborCategories" ToRole="WorkItems" />
+        </EntityType>
+        <EntityType Name="LaborType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Title" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CategoryId" Type="Int32" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="LaborCategory" Relationship="Self.FK__LaborType__Categ__45F365D3" FromRole="LaborTypes" ToRole="LaborCategories" />
+          <NavigationProperty Name="WorkItems" Relationship="Self.FK__WorkItems__Labor__5070F446" FromRole="LaborTypes" ToRole="WorkItems" />
+        </EntityType>
+        <EntityType Name="Recommendation">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Author" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="AuthorId" Type="Int32" Nullable="false" />
+          <Property Name="RecommendationDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="RecommendationTitle" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="RecommendationAuthor" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="RecommendationLink" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="Title" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Entry" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Tags" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Employee" Relationship="Self.FK__Recommend__Autho__46E78A0C" FromRole="Recommendations" ToRole="Employees" />
+        </EntityType>
+        <EntityType Name="SiteAccess">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Psuedonym" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Login" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Logout" Type="DateTime" Precision="3" />
+          <Property Name="IPAddress" Type="Binary" MaxLength="4" FixedLength="true" />
+          <Property Name="MACAddress" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="SupportTicket">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="EmpId" Type="Int32" Nullable="false" />
+          <Property Name="ClientId" Type="Int32" Nullable="false" />
+          <Property Name="ContractId" Type="Int32" Nullable="false" />
+          <Property Name="ContactName" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Contact" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TicketStart" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="TicketEnd" Type="DateTime" Precision="3" />
+          <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Client" Relationship="Self.FK__SupportTi__Clien__49C3F6B7" FromRole="SupportTickets" ToRole="Clients" />
+          <NavigationProperty Name="Contract" Relationship="Self.FK__SupportTi__Contr__47DBAE45" FromRole="SupportTickets" ToRole="Contracts" />
+          <NavigationProperty Name="Employee" Relationship="Self.FK__SupportTi__EmpId__48CFD27E" FromRole="SupportTickets" ToRole="Employees" />
+          <Property Name="BugId" Type="Int32" />
+          <NavigationProperty Name="BugReport" Relationship="SaturdaysChildDbModel.FK__SupportTi__BugId__73852659" FromRole="SupportTicket" ToRole="BugReport" />
+        </EntityType>
+        <EntityType Name="Timesheet">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="InternalId" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ContractId" Type="Int32" Nullable="false" />
+          <Property Name="InvoiceId" Type="Int32" Nullable="false" />
+          <Property Name="EmployeeId" Type="Int32" Nullable="false" />
+          <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="EndDate" Type="DateTime" Precision="3" />
+          <Property Name="TotalHours" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Contract" Relationship="Self.FK__Timesheet__Contr__4AB81AF0" FromRole="Timesheets" ToRole="Contracts" />
+          <NavigationProperty Name="Employee" Relationship="Self.FK__Timesheet__Emplo__4CA06362" FromRole="Timesheets" ToRole="Employees" />
+          <NavigationProperty Name="Invoice" Relationship="Self.FK__Timesheet__Invoi__4BAC3F29" FromRole="Timesheets" ToRole="Invoices" />
+          <NavigationProperty Name="WorkItems" Relationship="Self.FK__WorkItems__Times__4D94879B" FromRole="Timesheets" ToRole="WorkItems" />
+        </EntityType>
+        <EntityType Name="WorkItem">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="EmployeeId" Type="Int32" Nullable="false" />
+          <Property Name="ContractId" Type="Int32" Nullable="false" />
+          <Property Name="TimesheetId" Type="Int32" />
+          <Property Name="LaborCategoryId" Type="Int32" Nullable="false" />
+          <Property Name="LaborTypeId" Type="Int32" Nullable="false" />
+          <Property Name="WorkSite" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Billed" Type="Boolean" Nullable="false" />
+          <Property Name="Hours" Type="Int32" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Contract" Relationship="Self.FK__WorkItems__Contr__4E88ABD4" FromRole="WorkItems" ToRole="Contracts" />
+          <NavigationProperty Name="Employee" Relationship="Self.FK__WorkItems__Emplo__5165187F" FromRole="WorkItems" ToRole="Employees" />
+          <NavigationProperty Name="LaborCategory" Relationship="Self.FK__WorkItems__Labor__4F7CD00D" FromRole="WorkItems" ToRole="LaborCategories" />
+          <NavigationProperty Name="LaborType" Relationship="Self.FK__WorkItems__Labor__5070F446" FromRole="WorkItems" ToRole="LaborTypes" />
+          <NavigationProperty Name="Timesheet" Relationship="Self.FK__WorkItems__Times__4D94879B" FromRole="WorkItems" ToRole="Timesheets" />
+        </EntityType>
+        <Association Name="FK__AuditItem__Emplo__403A8C7D">
+          <End Role="Employees" Type="Self.Employee" Multiplicity="1" />
+          <End Role="AuditItems" Type="Self.AuditItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employees">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AuditItems">
+              <PropertyRef Name="EmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Blogs__AuthorId__412EB0B6">
+          <End Role="Employees" Type="Self.Employee" Multiplicity="1" />
+          <End Role="Blogs" Type="Self.Blog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employees">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Blogs">
+              <PropertyRef Name="AuthorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Contracts__Clien__4222D4EF">
+          <End Role="Clients" Type="Self.Client" Multiplicity="1" />
+          <End Role="Contracts" Type="Self.Contract" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Contracts">
+              <PropertyRef Name="ClientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Invoices__Client__440B1D61">
+          <End Role="Clients" Type="Self.Client" Multiplicity="1" />
+          <End Role="Invoices" Type="Self.Invoice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Invoices">
+              <PropertyRef Name="ClientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SupportTi__Clien__49C3F6B7">
+          <End Role="Clients" Type="Self.Client" Multiplicity="1" />
+          <End Role="SupportTickets" Type="Self.SupportTicket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SupportTickets">
+              <PropertyRef Name="ClientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Invoices__Contra__4316F928">
+          <End Role="Contracts" Type="Self.Contract" Multiplicity="1" />
+          <End Role="Invoices" Type="Self.Invoice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Contracts">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Invoices">
+              <PropertyRef Name="ContractId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__LaborCate__Contr__44FF419A">
+          <End Role="Contracts" Type="Self.Contract" Multiplicity="1" />
+          <End Role="LaborCategories" Type="Self.LaborCategory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Contracts">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="LaborCategories">
+              <PropertyRef Name="ContractId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SupportTi__Contr__47DBAE45">
+          <End Role="Contracts" Type="Self.Contract" Multiplicity="1" />
+          <End Role="SupportTickets" Type="Self.SupportTicket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Contracts">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SupportTickets">
+              <PropertyRef Name="ContractId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Timesheet__Contr__4AB81AF0">
+          <End Role="Contracts" Type="Self.Contract" Multiplicity="1" />
+          <End Role="Timesheets" Type="Self.Timesheet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Contracts">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Timesheets">
+              <PropertyRef Name="ContractId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__WorkItems__Contr__4E88ABD4">
+          <End Role="Contracts" Type="Self.Contract" Multiplicity="1" />
+          <End Role="WorkItems" Type="Self.WorkItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Contracts">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="WorkItems">
+              <PropertyRef Name="ContractId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Recommend__Autho__46E78A0C">
+          <End Role="Employees" Type="Self.Employee" Multiplicity="1" />
+          <End Role="Recommendations" Type="Self.Recommendation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employees">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Recommendations">
+              <PropertyRef Name="AuthorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SupportTi__EmpId__48CFD27E">
+          <End Role="Employees" Type="Self.Employee" Multiplicity="1" />
+          <End Role="SupportTickets" Type="Self.SupportTicket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employees">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SupportTickets">
+              <PropertyRef Name="EmpId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Timesheet__Emplo__4CA06362">
+          <End Role="Employees" Type="Self.Employee" Multiplicity="1" />
+          <End Role="Timesheets" Type="Self.Timesheet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employees">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Timesheets">
+              <PropertyRef Name="EmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__WorkItems__Emplo__5165187F">
+          <End Role="Employees" Type="Self.Employee" Multiplicity="1" />
+          <End Role="WorkItems" Type="Self.WorkItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employees">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="WorkItems">
+              <PropertyRef Name="EmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Timesheet__Invoi__4BAC3F29">
+          <End Role="Invoices" Type="Self.Invoice" Multiplicity="1" />
+          <End Role="Timesheets" Type="Self.Timesheet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Invoices">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Timesheets">
+              <PropertyRef Name="InvoiceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__LaborType__Categ__45F365D3">
+          <End Role="LaborCategories" Type="Self.LaborCategory" Multiplicity="1" />
+          <End Role="LaborTypes" Type="Self.LaborType" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LaborCategories">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="LaborTypes">
+              <PropertyRef Name="CategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__WorkItems__Labor__4F7CD00D">
+          <End Role="LaborCategories" Type="Self.LaborCategory" Multiplicity="1" />
+          <End Role="WorkItems" Type="Self.WorkItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LaborCategories">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="WorkItems">
+              <PropertyRef Name="LaborCategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__WorkItems__Labor__5070F446">
+          <End Role="LaborTypes" Type="Self.LaborType" Multiplicity="1" />
+          <End Role="WorkItems" Type="Self.WorkItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LaborTypes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="WorkItems">
+              <PropertyRef Name="LaborTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__WorkItems__Times__4D94879B">
+          <End Role="Timesheets" Type="Self.Timesheet" Multiplicity="0..1" />
+          <End Role="WorkItems" Type="Self.WorkItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Timesheets">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="WorkItems">
+              <PropertyRef Name="TimesheetId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="SaturdaysChildDbEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AuditItems" EntityType="Self.AuditItem" />
+          <EntitySet Name="Blogs" EntityType="Self.Blog" />
+          <EntitySet Name="BugReports" EntityType="Self.BugReport" />
+          <EntitySet Name="Clients" EntityType="Self.Client" />
+          <EntitySet Name="Contracts" EntityType="Self.Contract" />
+          <EntitySet Name="Employees" EntityType="Self.Employee" />
+          <EntitySet Name="Invoices" EntityType="Self.Invoice" />
+          <EntitySet Name="LaborCategories" EntityType="Self.LaborCategory" />
+          <EntitySet Name="LaborTypes" EntityType="Self.LaborType" />
+          <EntitySet Name="Recommendations" EntityType="Self.Recommendation" />
+          <EntitySet Name="SiteAccesses" EntityType="Self.SiteAccess" />
+          <EntitySet Name="SupportTickets" EntityType="Self.SupportTicket" />
+          <EntitySet Name="Timesheets" EntityType="Self.Timesheet" />
+          <EntitySet Name="WorkItems" EntityType="Self.WorkItem" />
+          <AssociationSet Name="FK__AuditItem__Emplo__403A8C7D" Association="Self.FK__AuditItem__Emplo__403A8C7D">
+            <End Role="Employees" EntitySet="Employees" />
+            <End Role="AuditItems" EntitySet="AuditItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Blogs__AuthorId__412EB0B6" Association="Self.FK__Blogs__AuthorId__412EB0B6">
+            <End Role="Employees" EntitySet="Employees" />
+            <End Role="Blogs" EntitySet="Blogs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Contracts__Clien__4222D4EF" Association="Self.FK__Contracts__Clien__4222D4EF">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="Contracts" EntitySet="Contracts" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Invoices__Client__440B1D61" Association="Self.FK__Invoices__Client__440B1D61">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="Invoices" EntitySet="Invoices" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SupportTi__Clien__49C3F6B7" Association="Self.FK__SupportTi__Clien__49C3F6B7">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="SupportTickets" EntitySet="SupportTickets" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Invoices__Contra__4316F928" Association="Self.FK__Invoices__Contra__4316F928">
+            <End Role="Contracts" EntitySet="Contracts" />
+            <End Role="Invoices" EntitySet="Invoices" />
+          </AssociationSet>
+          <AssociationSet Name="FK__LaborCate__Contr__44FF419A" Association="Self.FK__LaborCate__Contr__44FF419A">
+            <End Role="Contracts" EntitySet="Contracts" />
+            <End Role="LaborCategories" EntitySet="LaborCategories" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SupportTi__Contr__47DBAE45" Association="Self.FK__SupportTi__Contr__47DBAE45">
+            <End Role="Contracts" EntitySet="Contracts" />
+            <End Role="SupportTickets" EntitySet="SupportTickets" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Timesheet__Contr__4AB81AF0" Association="Self.FK__Timesheet__Contr__4AB81AF0">
+            <End Role="Contracts" EntitySet="Contracts" />
+            <End Role="Timesheets" EntitySet="Timesheets" />
+          </AssociationSet>
+          <AssociationSet Name="FK__WorkItems__Contr__4E88ABD4" Association="Self.FK__WorkItems__Contr__4E88ABD4">
+            <End Role="Contracts" EntitySet="Contracts" />
+            <End Role="WorkItems" EntitySet="WorkItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Recommend__Autho__46E78A0C" Association="Self.FK__Recommend__Autho__46E78A0C">
+            <End Role="Employees" EntitySet="Employees" />
+            <End Role="Recommendations" EntitySet="Recommendations" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SupportTi__EmpId__48CFD27E" Association="Self.FK__SupportTi__EmpId__48CFD27E">
+            <End Role="Employees" EntitySet="Employees" />
+            <End Role="SupportTickets" EntitySet="SupportTickets" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Timesheet__Emplo__4CA06362" Association="Self.FK__Timesheet__Emplo__4CA06362">
+            <End Role="Employees" EntitySet="Employees" />
+            <End Role="Timesheets" EntitySet="Timesheets" />
+          </AssociationSet>
+          <AssociationSet Name="FK__WorkItems__Emplo__5165187F" Association="Self.FK__WorkItems__Emplo__5165187F">
+            <End Role="Employees" EntitySet="Employees" />
+            <End Role="WorkItems" EntitySet="WorkItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Timesheet__Invoi__4BAC3F29" Association="Self.FK__Timesheet__Invoi__4BAC3F29">
+            <End Role="Invoices" EntitySet="Invoices" />
+            <End Role="Timesheets" EntitySet="Timesheets" />
+          </AssociationSet>
+          <AssociationSet Name="FK__LaborType__Categ__45F365D3" Association="Self.FK__LaborType__Categ__45F365D3">
+            <End Role="LaborCategories" EntitySet="LaborCategories" />
+            <End Role="LaborTypes" EntitySet="LaborTypes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__WorkItems__Labor__4F7CD00D" Association="Self.FK__WorkItems__Labor__4F7CD00D">
+            <End Role="LaborCategories" EntitySet="LaborCategories" />
+            <End Role="WorkItems" EntitySet="WorkItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK__WorkItems__Labor__5070F446" Association="Self.FK__WorkItems__Labor__5070F446">
+            <End Role="LaborTypes" EntitySet="LaborTypes" />
+            <End Role="WorkItems" EntitySet="WorkItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK__WorkItems__Times__4D94879B" Association="Self.FK__WorkItems__Times__4D94879B">
+            <End Role="Timesheets" EntitySet="Timesheets" />
+            <End Role="WorkItems" EntitySet="WorkItems" />
+          </AssociationSet>
+          <EntitySet Name="MemberMessages" EntityType="SaturdaysChildDbModel.MemberMessage" />
+          <AssociationSet Name="FK__SupportTi__BugId__73852659" Association="SaturdaysChildDbModel.FK__SupportTi__BugId__73852659">
+            <End Role="BugReport" EntitySet="BugReports" />
+            <End Role="SupportTicket" EntitySet="SupportTickets" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="MemberMessage">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Precision="3" />
+          <Property Name="Alert" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="MemberName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Message" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="From" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="IsEmployee" Type="Boolean" Nullable="false" />
+          <Property Name="IsRead" Type="Boolean" Nullable="false" />
+          <Property Name="ReadDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <Association Name="FK__SupportTi__BugId__73852659">
+          <End Type="SaturdaysChildDbModel.BugReport" Role="BugReport" Multiplicity="0..1" />
+          <End Type="SaturdaysChildDbModel.SupportTicket" Role="SupportTicket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BugReport">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SupportTicket">
+              <PropertyRef Name="BugId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="SaturdaysChildDbModelStoreContainer" CdmEntityContainer="SaturdaysChildDbEntities">
+          <EntitySetMapping Name="AuditItems">
+            <EntityTypeMapping TypeName="SaturdaysChildDbModel.AuditItem">
+              <MappingFragment StoreEntitySet="AuditItems">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+                <ScalarProperty Name="TableName" ColumnName="TableName" />
+                <ScalarProperty Name="EntryId" ColumnName="EntryId" />
+                <ScalarProperty Name="OldValue" ColumnName="OldValue" />
+                <ScalarProperty Name="NewValue" ColumnName="NewValue" />
+                <ScalarProperty Name="IPAddress" ColumnName="IPAddress" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Blogs">
+            <EntityTypeMapping TypeName="SaturdaysChildDbModel.Blog">
+              <MappingFragment StoreEntitySet="Blogs">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
+                <ScalarProperty Name="AuthorId" ColumnName="AuthorId" />
+                <ScalarProperty Name="Author" ColumnName="Author" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Entry" ColumnName="Entry" />
+                <ScalarProperty Name="Tags" ColumnName="Tags" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BugReports">
+            <EntityTypeMapping TypeName="SaturdaysChildDbModel.BugReport">
+              <MappingFragment StoreEntitySet="BugReports">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="BugTime" ColumnName="BugTime" />
+                <ScalarProperty Name="BugType" ColumnName="BugType" />
+                <ScalarProperty Name="BugDescription" ColumnName="BugDescription" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Clients">
+            <EntityTypeMapping TypeName="SaturdaysChildDbModel.Client">
+              <MappingFragment StoreEntitySet="Clients">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="InternalId" ColumnName="InternalId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="ContactEmail" ColumnName="ContactEmail" />
+                <ScalarProperty Name="AccountEmails" ColumnName="AccountEmails" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="ContactHours" ColumnName="ContactHours" />
+                <ScalarProperty Name="LastContact" ColumnName="LastContact" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Contracts">
+            <EntityTypeMapping TypeName="SaturdaysChildDbModel.Contract">
+              <MappingFragment StoreEntitySet="Contracts">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="InternalId" ColumnName="InternalId" />
+                <ScalarProperty Name="ClientId" ColumnName="ClientId" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
+                <ScalarProperty Name="TotalHours" ColumnName="TotalHours" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Employees">
+            <EntityTypeMapping TypeName="SaturdaysChildDbModel.Employee">
+              <MappingFragment StoreEntitySet="Employees">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="InternalId" ColumnName="InternalId" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="RequiredHours" ColumnName="RequiredHours" />
+                <ScalarProperty Name="Pay" ColumnName="Pay" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Invoices">
+            <EntityTypeMapping TypeName="SaturdaysChildDbModel.Invoice">
+              <MappingFragment StoreEntitySet="Invoices">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="InternalId" ColumnName="InternalId" />
+                <ScalarProperty Name="ClientId" ColumnName="ClientId" />
+                <ScalarProperty Name="ContractId" ColumnName="ContractId" />
+                <ScalarProperty Name="DateIssued" ColumnName="DateIssued" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LaborCategories">
+            <EntityTypeMapping TypeName="SaturdaysChildDbModel.LaborCategory">
+              <MappingFragment StoreEntitySet="LaborCategories">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="ContractId" ColumnName="ContractId" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LaborTypes">
+            <EntityTypeMapping TypeName="SaturdaysChildDbModel.LaborType">
+              <MappingFragment StoreEntitySet="LaborTypes">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Recommendations">
+            <EntityTypeMapping TypeName="SaturdaysChildDbModel.Recommendation">
+              <MappingFragment StoreEntitySet="Recommendations">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Author" ColumnName="Author" />
+                <ScalarProperty Name="AuthorId" ColumnName="AuthorId" />
+                <ScalarProperty Name="RecommendationDate" ColumnName="RecommendationDate" />
+                <ScalarProperty Name="RecommendationTitle" ColumnName="RecommendationTitle" />
+                <ScalarProperty Name="RecommendationAuthor" ColumnName="RecommendationAuthor" />
+                <ScalarProperty Name="RecommendationLink" ColumnName="RecommendationLink" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Entry" ColumnName="Entry" />
+                <ScalarProperty Name="Tags" ColumnName="Tags" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SiteAccesses">
+            <EntityTypeMapping TypeName="SaturdaysChildDbModel.SiteAccess">
+              <MappingFragment StoreEntitySet="SiteAccess">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Psuedonym" ColumnName="Psuedonym" />
+                <ScalarProperty Name="Login" ColumnName="Login" />
+                <ScalarProperty Name="Logout" ColumnName="Logout" />
+                <ScalarProperty Name="IPAddress" ColumnName="IPAddress" />
+                <ScalarProperty Name="MACAddress" ColumnName="MACAddress" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SupportTickets">
+            <EntityTypeMapping TypeName="SaturdaysChildDbModel.SupportTicket">
+              <MappingFragment StoreEntitySet="SupportTickets">
+                <ScalarProperty Name="BugId" ColumnName="BugId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="EmpId" ColumnName="EmpId" />
+                <ScalarProperty Name="ClientId" ColumnName="ClientId" />
+                <ScalarProperty Name="ContractId" ColumnName="ContractId" />
+                <ScalarProperty Name="ContactName" ColumnName="ContactName" />
+                <ScalarProperty Name="Contact" ColumnName="Contact" />
+                <ScalarProperty Name="TicketStart" ColumnName="TicketStart" />
+                <ScalarProperty Name="TicketEnd" ColumnName="TicketEnd" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Timesheets">
+            <EntityTypeMapping TypeName="SaturdaysChildDbModel.Timesheet">
+              <MappingFragment StoreEntitySet="Timesheets">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="InternalId" ColumnName="InternalId" />
+                <ScalarProperty Name="ContractId" ColumnName="ContractId" />
+                <ScalarProperty Name="InvoiceId" ColumnName="InvoiceId" />
+                <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="TotalHours" ColumnName="TotalHours" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WorkItems">
+            <EntityTypeMapping TypeName="SaturdaysChildDbModel.WorkItem">
+              <MappingFragment StoreEntitySet="WorkItems">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+                <ScalarProperty Name="ContractId" ColumnName="ContractId" />
+                <ScalarProperty Name="TimesheetId" ColumnName="TimesheetId" />
+                <ScalarProperty Name="LaborCategoryId" ColumnName="LaborCategoryId" />
+                <ScalarProperty Name="LaborTypeId" ColumnName="LaborTypeId" />
+                <ScalarProperty Name="WorkSite" ColumnName="WorkSite" />
+                <ScalarProperty Name="Billed" ColumnName="Billed" />
+                <ScalarProperty Name="Hours" ColumnName="Hours" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MemberMessages">
+            <EntityTypeMapping TypeName="SaturdaysChildDbModel.MemberMessage">
+              <MappingFragment StoreEntitySet="MemberMessages">
+                <ScalarProperty Name="ReadDate" ColumnName="ReadDate" />
+                <ScalarProperty Name="IsRead" ColumnName="IsRead" />
+                <ScalarProperty Name="IsEmployee" ColumnName="IsEmployee" />
+                <ScalarProperty Name="From" ColumnName="From" />
+                <ScalarProperty Name="Message" ColumnName="Message" />
+                <ScalarProperty Name="MemberName" ColumnName="MemberName" />
+                <ScalarProperty Name="Alert" ColumnName="Alert" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

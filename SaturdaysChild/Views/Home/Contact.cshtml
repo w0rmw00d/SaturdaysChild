@@ -1,0 +1,55 @@
+﻿@model SaturdaysChild.Models.ViewModels.ContactViewModel
+
+@{
+    ViewBag.Title = "Contact";
+}
+
+@section scripts {
+    <link rel="stylesheet" href="~/Content/jquery.timepicker.css" type="text/css" />
+    <script type="text/javascript" src="~/Scripts/jquery.timepicker.min.js"></script>
+}
+
+<div class="content-div">
+    @using (Html.BeginForm("Contact", "Home", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="content-flex">
+            <div class="content-fixed-item">
+                <img class="illustrations" src='@Url.Content("/Content/Images/General/drummer.png")' />
+            </div>
+            <div class="content-flex-item">
+                <table>
+                    <tr>
+                        <th>@Html.LabelFor(a => a.Name)</th>
+                        <td>@Html.TextBoxFor(a => a.Name)</td>
+                    </tr>
+                    <tr>
+                        <th>@Html.LabelFor(a => a.Email)</th>
+                        <td>@Html.TextBoxFor(a => a.Email)</td>
+                    </tr>
+                    <tr>
+                        <th>@Html.LabelFor(a => a.Phone)</th>
+                        <td>@Html.TextBoxFor(a => a.Phone)</td>
+                    </tr>
+                    <tr>
+                        <th>@Html.LabelFor(a => a.BestContactStart)</th>
+                        <td>@Html.EditorFor(a => a.BestContactStart)</td>
+                    </tr>
+                    <tr>
+                        <th>@Html.LabelFor(a => a.Message)</th>
+                        <td>@Html.TextAreaFor(a => a.Message, 10, 45, null)</td>
+                    </tr>
+                    <tr>
+                        <th></th>
+                        <td><input class="pull-right" type="submit" value="Send" /></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    }
+    <!-- added to allow clients direct contact -->
+    <div class="content-flex">
+        <div class="content-flex-item" style="text-align: right;"><h4><strong>Direct Email:</strong></h4><h4 class="subheading"> SaturdaysChild@gmail.com</h4></div>
+    </div>
+</div>
