@@ -49,6 +49,30 @@ namespace SaturdaysChild.Controllers
         }
 
         //
+        // GET: /Account/EditAccount
+        [HttpGet]
+        public ActionResult EditAccount()
+        {
+            return View();
+        }
+
+        //
+        // POST: /Account/EditAccount
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditAccount(EditAccountViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                // TODO: add error message
+                return View(model);
+            }
+
+            // TODO: redirect to MemberIndexViewModel
+            return View();
+        }
+
+        //
         // GET: /Account/Login
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
@@ -69,9 +93,8 @@ namespace SaturdaysChild.Controllers
                 return View(model);
             }
 
-            // This doesn't count login failures towards account lockout
-            // To enable password failures to trigger account lockout, change to shouldLockout: true
-            var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
+            // Password failures are enabled to trigger account lockout
+            var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: true);
             switch (result)
             {
                 case SignInStatus.Success:

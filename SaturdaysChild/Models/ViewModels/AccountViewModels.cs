@@ -3,6 +3,17 @@ using System.ComponentModel.DataAnnotations;
 
 namespace SaturdaysChild.Models.ViewModels
 {
+    public class EditAccountViewModel
+    {
+        [Required]
+        [Display(Name = "Display Name")]
+        public string DisplayName { get; set; }
+
+        [Required]
+        [Display(Name = "Email")]
+        public string Email { get; set; }
+    }
+
     public class ExternalLoginConfirmationViewModel
     {
         [Required]
