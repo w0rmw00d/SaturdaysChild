@@ -6,8 +6,8 @@ namespace SaturdaysChild.Models.ViewModels
     public class EditAccountViewModel
     {
         [Required]
-        [Display(Name = "Display Name")]
-        public string DisplayName { get; set; }
+        [Display(Name = "User Name")]
+        public string UserName { get; set; }
 
         [Required]
         [Display(Name = "Email")]
@@ -76,6 +76,10 @@ namespace SaturdaysChild.Models.ViewModels
     public class RegisterViewModel
     {
         [Required]
+        [Display(Name = "User Name")]
+        public string UserName { get; set; }
+        
+        [Required]
         [EmailAddress]
         [Display(Name = "Email")]
         public string Email { get; set; }
@@ -86,6 +90,7 @@ namespace SaturdaysChild.Models.ViewModels
         [Display(Name = "Password")]
         public string Password { get; set; }
 
+        [Required]
         [DataType(DataType.Password)]
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]

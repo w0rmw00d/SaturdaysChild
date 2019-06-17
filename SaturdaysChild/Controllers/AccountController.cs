@@ -7,18 +7,23 @@ using Microsoft.Owin.Security;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using SaturdaysChild.Models.ViewModels;
+using SaturdaysChild.Models.EntityModel;
 
 namespace SaturdaysChild.Controllers
 {
     [Authorize]
     public class AccountController : Controller
     {
+        // reference to Entity model
+        private SaturdaysChildDbEntities satChilddb;
+        public SaturdaysChildDbEntities SatChilddb { get => satChilddb; set => satChilddb = value; }
+
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
 
-        public AccountController(){}
+        public AccountController() { }
 
-        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
+        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
         {
             UserManager = userManager;
             SignInManager = signInManager;
@@ -30,9 +35,9 @@ namespace SaturdaysChild.Controllers
             {
                 return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
             }
-            private set 
-            { 
-                _signInManager = value; 
+            private set
+            {
+                _signInManager = value;
             }
         }
 
@@ -48,12 +53,24 @@ namespace SaturdaysChild.Controllers
             }
         }
 
-        //
+        // NOTE: all client accounts are, by definition, bound to the "user" role
         // GET: /Account/EditAccount
         [HttpGet]
         public ActionResult EditAccount()
         {
-            return View();
+            var role = User.Identity.Name.;
+            var name = role.Equals("user") ? satChilddb.Clients.Single(a => a.ContactEmail.Equals(HttpContext.User.Identity.Name)).Name
+                                           : satChilddb.Employees.Single(a => a.Email.Equals(HttpContext.User.Identity.Name)).Name;
+            var email = role.Equals("user") ? satChilddb.Clients.Single(a => a.ContactEmail.Equals(HttpContext.User.Identity.Name)).ContactEmail
+                                           : satChilddb.Employees.Single(a => a.Email.Equals(HttpContext.User.Identity.Name)).Email;
+
+            var model = new EditAccountViewModel
+            {
+                UserName = name,
+                Email = email
+            };
+
+            return View(model);
         }
 
         //
@@ -64,12 +81,14 @@ namespace SaturdaysChild.Controllers
         {
             if (!ModelState.IsValid)
             {
-                // TODO: add error message
+                ViewBag.IndexMessage = "There was an error editing the account. Please try again.";
                 return View(model);
             }
+            // NOTE: this does not change the user name in the db created with SQLMembership Provider, just the display name
+            var role = satChilddb.Clients.SingleOrDefault(a => a.ContactEmail.Equals(HttpContext.User.Identity.Name));
 
-            // TODO: redirect to MemberIndexViewModel
-            return View();
+
+            return RedirectToAction("Index", "MembersController");
         }
 
         //
@@ -102,7 +121,7 @@ namespace SaturdaysChild.Controllers
                 case SignInStatus.LockedOut:
                     return View("Lockout");
                 case SignInStatus.RequiresVerification:
-                    return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
+                    return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, model.RememberMe });
                 case SignInStatus.Failure:
                 default:
                     ModelState.AddModelError("", "Invalid login attempt.");

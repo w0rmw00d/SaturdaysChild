@@ -11,9 +11,7 @@ namespace SaturdaysChild.Controllers
 {
     public class SupportController : Controller
     {
-        // reference to Entity model
-        private SaturdaysChildDbEntities satChilddb;
-        public SaturdaysChildDbEntities SatChilddb { get => satChilddb; set => satChilddb = value; }
+        public SaturdaysChildDbEntities SatChilddb { get; set; }
 
         /// <summary>
         /// Gets page used to add a new support ticket to the database. Instantiates AddSupportTicket.
@@ -42,28 +40,30 @@ namespace SaturdaysChild.Controllers
         [Authorize(Roles = "admin, employee")]
         public ActionResult Add(AddSupportTicket model)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                var ticket = new SupportTicket
-                {
-                    EmpId = satChilddb.Employees.FirstOrDefault(a => a.Name.Equals(HttpContext.User.Identity.Name)).Id,
-                    ClientId = satChilddb.Clients.FirstOrDefault(a => a.Name.Equals(model.Client)).Id,
-                    ContractId = satChilddb.Contracts.FirstOrDefault(a => a.Title.Equals(model.Contract)).Id,
-                    ContactName = model.ContactName,
-                    Contact = model.Contact,
-                    TicketStart = DateTime.Now,
-                    Notes = model.Notes,
-                    BugId = model.BugId
-                };
-                satChilddb.SupportTickets.Add(ticket);
-                satChilddb.SaveChangesAsync();
-                // finding last entry
-                // var lastEntry = satChilddb.SupportTickets.LastOrDefault(a => a.Author.Equals(model.Author));
-                // adding new entry to lucene_index
-                // TODO: add implementation for searching support tickets
-                return RedirectToAction("Index", new { message = SupportMessages.AddSuccess });
+                ViewBag.IndexMessage = "An error has occurred. Please try again.";
+                return RedirectToAction("Add", model);
             }
-            return RedirectToAction("Add", model);
+            var ticket = new SupportTicket
+            {
+                EmpId = SatChilddb.Employees.FirstOrDefault(a => a.Name.Equals(HttpContext.User.Identity.Name)).Id,
+                ClientId = SatChilddb.Clients.FirstOrDefault(a => a.Name.Equals(model.Client)).Id,
+                ContractId = SatChilddb.Contracts.FirstOrDefault(a => a.Title.Equals(model.Contract)).Id,
+                ContactName = model.ContactName,
+                Contact = model.Contact,
+                TicketStart = DateTime.Now,
+                Notes = model.Notes,
+                BugId = model.BugId
+            };
+
+            SatChilddb.SupportTickets.Add(ticket);
+            SatChilddb.SaveChangesAsync();
+            // finding last entry
+            // var lastEntry = satChilddb.SupportTickets.LastOrDefault(a => a.Author.Equals(model.Author));
+            // adding new entry to lucene_index
+            // TODO: add implementation for searching support tickets
+            return RedirectToAction("Index", new { message = SupportMessages.AddSuccess });
         }
 
         /// <summary>
@@ -79,8 +79,8 @@ namespace SaturdaysChild.Controllers
         {
             try
             {
-                satChilddb.SupportTickets.Remove(satChilddb.SupportTickets.FirstOrDefault(a => a.Id == id));
-                satChilddb.SaveChangesAsync();
+                SatChilddb.SupportTickets.Remove(SatChilddb.SupportTickets.FirstOrDefault(a => a.Id == id));
+                SatChilddb.SaveChangesAsync();
                 // removing entry from lucene_index
                 // var indexId = LuceneSearch.Search("", "");
                 return RedirectToAction("Index", new { message = SupportMessages.DeleteSuccess });
@@ -101,13 +101,13 @@ namespace SaturdaysChild.Controllers
         [Authorize(Roles = "admin")]
         public ActionResult Edit(int id)
         {
-            var entry = satChilddb.SupportTickets.FirstOrDefault(a => a.Id == id);
+            var entry = SatChilddb.SupportTickets.FirstOrDefault(a => a.Id == id);
             var model = new EditSupportTicket
             {
                 Id = id,
-                Employee = satChilddb.Employees.FirstOrDefault(a => a.Id == entry.EmpId).Name,
-                Client = satChilddb.Clients.FirstOrDefault(a => a.Id == entry.ClientId).Name,
-                Contract = satChilddb.Contracts.FirstOrDefault(a => a.Id == entry.ContractId).Title,
+                Employee = SatChilddb.Employees.FirstOrDefault(a => a.Id == entry.EmpId).Name,
+                Client = SatChilddb.Clients.FirstOrDefault(a => a.Id == entry.ClientId).Name,
+                Contract = SatChilddb.Contracts.FirstOrDefault(a => a.Id == entry.ContractId).Title,
                 ContactName = entry.ContactName,
                 Contact = entry.Contact,
                 TicketStart = entry.TicketStart,
@@ -129,23 +129,21 @@ namespace SaturdaysChild.Controllers
         [Authorize(Roles = "admin")]
         public ActionResult Edit(EditSupportTicket model)
         {
-            if (ModelState.IsValid)
-            {
-                var entry = satChilddb.SupportTickets.FirstOrDefault(a => a.Id == model.Id);
-                entry.EmpId = (entry.EmpId == satChilddb.Employees.FirstOrDefault(a => a.Name.Equals(model.Employee)).Id) ? entry.EmpId : satChilddb.Employees.FirstOrDefault(a => a.Name.Equals(model.Employee)).Id;
-                entry.ClientId = (entry.ClientId == satChilddb.Clients.FirstOrDefault(a => a.Name.Equals(model.Client)).Id) ? entry.ClientId : satChilddb.Clients.FirstOrDefault(a => a.Name.Equals(model.Client)).Id;
-                entry.ContractId = (entry.ContractId == satChilddb.Contracts.FirstOrDefault(a => a.Title.Equals(model.Contract)).Id) ? entry.ContractId : satChilddb.Contracts.FirstOrDefault(a => a.Title.Equals(model.Contract)).Id;
-                entry.ContactName = (entry.ContactName.Equals(model.ContactName) ? entry.ContactName : model.ContactName);
-                entry.Contact = entry.Contact.Equals(model.Contact) ? entry.Contact : model.Contact;
-                entry.TicketStart = entry.TicketStart == model.TicketStart ? entry.TicketStart : model.TicketStart;
-                entry.TicketEnd = entry.TicketEnd == model.TicketEnd ? entry.TicketEnd : model.TicketEnd;
-                entry.Notes = entry.Notes.Equals(model.Notes) ? entry.Notes : model.Notes;
-                entry.BugId = entry.BugId == model.BugId ? entry.BugId : model.BugId;
+            if (!ModelState.IsValid) return RedirectToAction("Index", new { message = SupportMessages.Error });
 
-                satChilddb.SaveChangesAsync();
-                return RedirectToAction("Index", new { message = SupportMessages.EditSuccess });
-            }
-            return RedirectToAction("Index", new { message = SupportMessages.Error });
+            var entry = SatChilddb.SupportTickets.FirstOrDefault(a => a.Id == model.Id);
+            entry.EmpId = (entry.EmpId == SatChilddb.Employees.FirstOrDefault(a => a.Name.Equals(model.Employee)).Id) ? entry.EmpId : SatChilddb.Employees.FirstOrDefault(a => a.Name.Equals(model.Employee)).Id;
+            entry.ClientId = (entry.ClientId == SatChilddb.Clients.FirstOrDefault(a => a.Name.Equals(model.Client)).Id) ? entry.ClientId : SatChilddb.Clients.FirstOrDefault(a => a.Name.Equals(model.Client)).Id;
+            entry.ContractId = (entry.ContractId == SatChilddb.Contracts.FirstOrDefault(a => a.Title.Equals(model.Contract)).Id) ? entry.ContractId : SatChilddb.Contracts.FirstOrDefault(a => a.Title.Equals(model.Contract)).Id;
+            entry.ContactName = (entry.ContactName.Equals(model.ContactName) ? entry.ContactName : model.ContactName);
+            entry.Contact = entry.Contact.Equals(model.Contact) ? entry.Contact : model.Contact;
+            entry.TicketStart = entry.TicketStart == model.TicketStart ? entry.TicketStart : model.TicketStart;
+            entry.TicketEnd = entry.TicketEnd == model.TicketEnd ? entry.TicketEnd : model.TicketEnd;
+            entry.Notes = entry.Notes.Equals(model.Notes) ? entry.Notes : model.Notes;
+            entry.BugId = entry.BugId == model.BugId ? entry.BugId : model.BugId;
+
+            SatChilddb.SaveChangesAsync();
+            return RedirectToAction("Index", new { message = SupportMessages.EditSuccess });       
         }
 
         /// <summary>
