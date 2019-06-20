@@ -9,14 +9,14 @@ using Microsoft.AspNet.Identity.Owin;
 using SaturdaysChild.Models.ViewModels;
 using SaturdaysChild.Models.EntityModel;
 
+
 namespace SaturdaysChild.Controllers
 {
     [Authorize]
     public class AccountController : Controller
     {
-        // reference to Entity model
-        private SaturdaysChildDbEntities satChilddb;
-        public SaturdaysChildDbEntities SatChilddb { get => satChilddb; set => satChilddb = value; }
+        public SaturdaysChildDbEntities SatChilddb { get; set; }
+        private ApplicationDbContext context = new ApplicationDbContext();
 
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
@@ -53,42 +53,65 @@ namespace SaturdaysChild.Controllers
             }
         }
 
-        // NOTE: all client accounts are, by definition, bound to the "user" role
-        // GET: /Account/EditAccount
+        // NOTE: all client accounts are, by definition, bound to the "user" role.
+        // Anyone with system credentials may edit their own user name.
+        // GET: /Account/EditUserName
         [HttpGet]
-        public ActionResult EditAccount()
+        public ActionResult EditUserName()
         {
-            var role = User.Identity.Name.;
-            var name = role.Equals("user") ? satChilddb.Clients.Single(a => a.ContactEmail.Equals(HttpContext.User.Identity.Name)).Name
-                                           : satChilddb.Employees.Single(a => a.Email.Equals(HttpContext.User.Identity.Name)).Name;
-            var email = role.Equals("user") ? satChilddb.Clients.Single(a => a.ContactEmail.Equals(HttpContext.User.Identity.Name)).ContactEmail
-                                           : satChilddb.Employees.Single(a => a.Email.Equals(HttpContext.User.Identity.Name)).Email;
-
-            var model = new EditAccountViewModel
+            var user = HttpContext.User.Identity.Name; // in this case, this is the email            
+            var name = !HttpContext.User.IsInRole("user") ? SatChilddb.Employees.First(a => a.Email.Equals(user)).DisplayName  
+                                                          : SatChilddb.Clients.First(a => a.ContactEmail.Equals(user)).DisplayName;
+            var model = new EditUserNameViewModel
             {
                 UserName = name,
-                Email = email
+                Client = HttpContext.User.IsInRole("user")
             };
-
             return View(model);
         }
 
         //
-        // POST: /Account/EditAccount
+        // POST: /Account/EditUserName
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult EditAccount(EditAccountViewModel model)
+        public ActionResult EditUserName(EditUserNameViewModel model)
         {
             if (!ModelState.IsValid)
             {
-                ViewBag.IndexMessage = "There was an error editing the account. Please try again.";
+                ViewBag.IndexMessage = "There was an error editing your account. Please try again. If the problem persists, please contact a system administrator.";
                 return View(model);
             }
-            // NOTE: this does not change the user name in the db created with SQLMembership Provider, just the display name
-            var role = satChilddb.Clients.SingleOrDefault(a => a.ContactEmail.Equals(HttpContext.User.Identity.Name));
+            // NOTE: this does not change the user name in the Identity db
+            try
+            {
+                if (model.Client)
+                {
+                    var client = SatChilddb.Clients.First(a => a.ContactEmail.Equals(model.UserName));
+                    client.DisplayName = model.UserName;
+                    return RedirectToAction("Index", "MembersController");
+                }
 
 
-            return RedirectToAction("Index", "MembersController");
+
+
+                return RedirectToAction("Index", "MembersController");
+            }
+            catch
+            {
+                ViewBag.IndexMessage = "There was an error editing your account. Please try again. If the problem persists, please contact an administrator.";
+                return View(model);
+            }
+        }
+
+
+        // Permits administrators to update account details 
+        // GET: /Account/EditAccount
+        [HttpGet]
+        [Authorize(Roles = "admin")]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditAccount()
+        {
+            return View();
         }
 
         //

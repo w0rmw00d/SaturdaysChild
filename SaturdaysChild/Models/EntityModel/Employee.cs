@@ -35,6 +35,9 @@ namespace SaturdaysChild.Models.EntityModel
         public int RequiredHours { get; set; }
         public int Pay { get; set; }
         public string Notes { get; set; }
+        public bool Active { get; set; }
+        public string Role { get; set; }
+        public string DisplayName { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AuditItem> AuditItems { get; set; }

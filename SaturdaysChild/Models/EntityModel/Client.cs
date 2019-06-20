@@ -32,6 +32,8 @@ namespace SaturdaysChild.Models.EntityModel
         public Nullable<int> ContactHours { get; set; }
         public Nullable<System.DateTime> LastContact { get; set; }
         public string Notes { get; set; }
+        public bool Active { get; set; }
+        public string DisplayName { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Contract> Contracts { get; set; }

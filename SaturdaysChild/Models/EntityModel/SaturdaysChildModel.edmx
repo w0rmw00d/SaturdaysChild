@@ -53,6 +53,8 @@
           <Property Name="ContactHours" Type="int" />
           <Property Name="LastContact" Type="datetime" />
           <Property Name="Notes" Type="varchar(max)" />
+          <Property Name="Active" Type="bit" Nullable="false" />
+          <Property Name="DisplayName" Type="varchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="Contracts">
           <Key>
@@ -82,6 +84,9 @@
           <Property Name="RequiredHours" Type="int" Nullable="false" />
           <Property Name="Pay" Type="int" Nullable="false" />
           <Property Name="Notes" Type="varchar(max)" />
+          <Property Name="Active" Type="bit" Nullable="false" />
+          <Property Name="Role" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="DisplayName" Type="varchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="Invoices">
           <Key>
@@ -592,6 +597,8 @@
           <NavigationProperty Name="Contracts" Relationship="Self.FK__Contracts__Clien__4222D4EF" FromRole="Clients" ToRole="Contracts" />
           <NavigationProperty Name="Invoices" Relationship="Self.FK__Invoices__Client__440B1D61" FromRole="Clients" ToRole="Invoices" />
           <NavigationProperty Name="SupportTickets" Relationship="Self.FK__SupportTi__Clien__49C3F6B7" FromRole="Clients" ToRole="SupportTickets" />
+          <Property Name="Active" Type="Boolean" Nullable="false" />
+          <Property Name="DisplayName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="Contract">
           <Key>
@@ -633,6 +640,9 @@
           <NavigationProperty Name="SupportTickets" Relationship="Self.FK__SupportTi__EmpId__48CFD27E" FromRole="Employees" ToRole="SupportTickets" />
           <NavigationProperty Name="Timesheets" Relationship="Self.FK__Timesheet__Emplo__4CA06362" FromRole="Employees" ToRole="Timesheets" />
           <NavigationProperty Name="WorkItems" Relationship="Self.FK__WorkItems__Emplo__5165187F" FromRole="Employees" ToRole="WorkItems" />
+          <Property Name="Active" Type="Boolean" Nullable="false" />
+          <Property Name="Role" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="DisplayName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="Invoice">
           <Key>
@@ -1153,6 +1163,8 @@
           <EntitySetMapping Name="Clients">
             <EntityTypeMapping TypeName="SaturdaysChildDbModel.Client">
               <MappingFragment StoreEntitySet="Clients">
+                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="InternalId" ColumnName="InternalId" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
@@ -1184,6 +1196,9 @@
           <EntitySetMapping Name="Employees">
             <EntityTypeMapping TypeName="SaturdaysChildDbModel.Employee">
               <MappingFragment StoreEntitySet="Employees">
+                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+                <ScalarProperty Name="Role" ColumnName="Role" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="InternalId" ColumnName="InternalId" />
