@@ -62,9 +62,10 @@ namespace SaturdaysChild.Controllers
             var user = HttpContext.User.Identity.Name; // in this case, this is the email            
             var name = !HttpContext.User.IsInRole("user") ? SatChilddb.Employees.First(a => a.Email.Equals(user)).DisplayName  
                                                           : SatChilddb.Clients.First(a => a.ContactEmail.Equals(user)).DisplayName;
-            var model = new EditUserNameViewModel
+            var model = new EditDisplayNameViewModel
             {
-                UserName = name,
+                DisplayName = name,
+                Email = user,
                 Client = HttpContext.User.IsInRole("user")
             };
             return View(model);
@@ -74,7 +75,7 @@ namespace SaturdaysChild.Controllers
         // POST: /Account/EditUserName
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult EditUserName(EditUserNameViewModel model)
+        public ActionResult EditUserName(EditDisplayNameViewModel model)
         {
             if (!ModelState.IsValid)
             {
@@ -86,14 +87,16 @@ namespace SaturdaysChild.Controllers
             {
                 if (model.Client)
                 {
-                    var client = SatChilddb.Clients.First(a => a.ContactEmail.Equals(model.UserName));
-                    client.DisplayName = model.UserName;
-                    return RedirectToAction("Index", "MembersController");
+                    var client = SatChilddb.Clients.First(a => a.ContactEmail.Equals(model.Email));
+                    client.DisplayName = model.DisplayName;
+                }
+                else
+                {
+                    var employee = SatChilddb.Employees.First(a => a.Email.Equals(model.Email));
+                    employee.DisplayName = model.DisplayName;
                 }
 
-
-
-
+                SatChilddb.SaveChangesAsync();
                 return RedirectToAction("Index", "MembersController");
             }
             catch
@@ -102,7 +105,6 @@ namespace SaturdaysChild.Controllers
                 return View(model);
             }
         }
-
 
         // Permits administrators to update account details 
         // GET: /Account/EditAccount

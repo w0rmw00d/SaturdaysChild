@@ -3,11 +3,19 @@ using System.ComponentModel.DataAnnotations;
 
 namespace SaturdaysChild.Models.ViewModels
 {
-    public class EditUserNameViewModel
+    public class EditAccountViewModel
+    {
+
+    }
+
+    public class EditDisplayNameViewModel
     {
         [Required]
-        [Display(Name = "User Name")]
-        public string UserName { get; set; }
+        [Display(Name = "Display Name")]
+        public string DisplayName { get; set; }
+
+        [Required]
+        public string Email { get; set; }
 
         [Required]
         public bool Client { get; set; }
@@ -25,33 +33,17 @@ namespace SaturdaysChild.Models.ViewModels
         public string ReturnUrl { get; set; }
     }
 
-    public class SendCodeViewModel
-    {
-        public string SelectedProvider { get; set; }
-        public ICollection<System.Web.Mvc.SelectListItem> Providers { get; set; }
-        public string ReturnUrl { get; set; }
-        public bool RememberMe { get; set; }
-    }
-
-    public class VerifyCodeViewModel
-    {
-        [Required]
-        public string Provider { get; set; }
-
-        [Required]
-        [Display(Name = "Code")]
-        public string Code { get; set; }
-        public string ReturnUrl { get; set; }
-
-        [Display(Name = "Remember this browser?")]
-        public bool RememberBrowser { get; set; }
-
-        public bool RememberMe { get; set; }
-    }
-
     public class ForgotViewModel
     {
         [Required]
+        [Display(Name = "Email")]
+        public string Email { get; set; }
+    }
+
+    public class ForgotPasswordViewModel
+    {
+        [Required]
+        [EmailAddress]
         [Display(Name = "Email")]
         public string Email { get; set; }
     }
@@ -77,7 +69,7 @@ namespace SaturdaysChild.Models.ViewModels
         [Required]
         [Display(Name = "User Name")]
         public string UserName { get; set; }
-        
+
         [Required]
         [EmailAddress]
         [Display(Name = "Email")]
@@ -117,11 +109,27 @@ namespace SaturdaysChild.Models.ViewModels
         public string Code { get; set; }
     }
 
-    public class ForgotPasswordViewModel
+    public class SendCodeViewModel
+    {
+        public string SelectedProvider { get; set; }
+        public ICollection<System.Web.Mvc.SelectListItem> Providers { get; set; }
+        public string ReturnUrl { get; set; }
+        public bool RememberMe { get; set; }
+    }
+
+    public class VerifyCodeViewModel
     {
         [Required]
-        [EmailAddress]
-        [Display(Name = "Email")]
-        public string Email { get; set; }
+        public string Provider { get; set; }
+
+        [Required]
+        [Display(Name = "Code")]
+        public string Code { get; set; }
+        public string ReturnUrl { get; set; }
+
+        [Display(Name = "Remember this browser?")]
+        public bool RememberBrowser { get; set; }
+
+        public bool RememberMe { get; set; }
     }
 }

@@ -164,7 +164,7 @@ namespace SaturdaysChild.Controllers
         }
 
         /// <summary>
-        /// Gets the Index page.
+        /// Gets the Index page. This is the default landing page for all users logged into the system.
         /// </summary>
         /// <returns></returns>
         [HttpGet]

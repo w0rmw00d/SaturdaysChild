@@ -27,6 +27,7 @@ namespace SaturdaysChild
 
             // creating first admin account if none is present (default admin)
             // NOTE: admin role represents site admin
+            // ALSO NOTE: this is not the credentials the actual site would have
             if (!roleManager.RoleExists("admin"))
             {
                 // creating admin role
