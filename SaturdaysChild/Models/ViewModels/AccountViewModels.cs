@@ -5,7 +5,7 @@ namespace SaturdaysChild.Models.ViewModels
 {
     public class EditAccountViewModel
     {
-
+        
     }
 
     public class EditDisplayNameViewModel
