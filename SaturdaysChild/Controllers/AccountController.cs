@@ -53,6 +53,29 @@ namespace SaturdaysChild.Controllers
             }
         }
 
+        // NOTE: This allows manipulation of the Identity db. Handle with care.
+        // GET: /Account/DeleteAccount
+        [HttpGet]
+        [Authorize(Roles = "admin")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteAccount(string accountName)
+        {
+            try
+            {
+                // TODO: add logging here for compliance
+                context.Users.Remove(context.Users.First(a => a.Email.Equals(accountName)));
+                context.SaveChangesAsync();
+
+                return RedirectToAction("Index", "MembersController");
+            }
+            catch
+            {
+                // TODO: add error dump page direct, with text of error, for troubleshoot with admin users.
+                ViewBag.IndexMessage = "There was an error deleting this account.";
+                return RedirectToAction("GetAccount");
+            }
+        }
+
         // NOTE: all client accounts are, by definition, bound to the "user" role.
         // Anyone with system credentials may edit their own user name.
         // GET: /Account/EditUserName
@@ -82,7 +105,6 @@ namespace SaturdaysChild.Controllers
                 ViewBag.IndexMessage = "There was an error editing your account. Please try again. If the problem persists, please contact a system administrator.";
                 return View(model);
             }
-            // NOTE: this does not change the user name in the Identity db
             try
             {
                 if (model.Client)
@@ -106,7 +128,8 @@ namespace SaturdaysChild.Controllers
             }
         }
 
-        // Permits administrators to update account details 
+        // Permits administrators to update account details
+        // NOTE: This allows manipulation of the Identity db. Handle with care.
         // GET: /Account/EditAccount
         [HttpGet]
         [Authorize(Roles = "admin")]
@@ -114,6 +137,29 @@ namespace SaturdaysChild.Controllers
         public ActionResult EditAccount()
         {
             return View();
+        }
+
+        //
+        // NOTE: This allows manipulation of the Identity db. Handle with care.
+        // POST: /Account/EditAccount
+        [HttpPost]
+        [Authorize(Roles = "admin")]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditAccount(EditAccountViewModel model)
+        {
+            return View();
+        }
+
+        // NOTE: this takes for granted a relatively limited number of accounts. If 
+        // this changes, the list should be replaced with a search function.
+        // Locates accounts from the Identity db for admin users
+        // GET: /Account/GetAccount
+        [HttpGet]
+        [Authorize(Roles = "admin")]
+        [ValidateAntiForgeryToken]
+        public ActionResult GetAccount()
+        {
+            return View(new GetAccountViewModel { AccountNames = context.Users.Select(a => a.Email).ToList() });
         }
 
         //

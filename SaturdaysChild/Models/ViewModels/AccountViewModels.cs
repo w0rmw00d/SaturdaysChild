@@ -5,7 +5,19 @@ namespace SaturdaysChild.Models.ViewModels
 {
     public class EditAccountViewModel
     {
-        
+        [Required]
+        [Display(Name = "Email")]
+        [EmailAddress]
+        public string Email { get; set; }
+
+        [Required]
+        [Display(Name = "Phone Number")]
+        [Phone]
+        public string PhoneNumber { get; set; }
+
+        [Required]
+        [Display(Name = "User Name")]
+        public string UserName { get; set; }
     }
 
     public class EditDisplayNameViewModel
@@ -46,6 +58,11 @@ namespace SaturdaysChild.Models.ViewModels
         [EmailAddress]
         [Display(Name = "Email")]
         public string Email { get; set; }
+    }
+
+    public class GetAccountViewModel
+    {
+        public List<string> AccountNames { get; set; }
     }
 
     public class LoginViewModel
