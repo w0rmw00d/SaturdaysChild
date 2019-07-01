@@ -19,9 +19,7 @@ namespace SaturdaysChild.Controllers
 {
     public class HomeController : Controller
     {
-        // reference to the Entity model
-        private SaturdaysChildDbEntities satChilddb;
-        public SaturdaysChildDbEntities SatChilddb { get => satChilddb; set => satChilddb = value; }
+        public SaturdaysChildDbEntities SatChilddb { get; set; }
 
         /// <summary>
         /// Gets the About page.
@@ -69,7 +67,12 @@ namespace SaturdaysChild.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> BugReport(BugReportViewModel model)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
+            {
+                return RedirectToAction("BugReport", model);
+            }
+
+            try
             {
                 var report = new BugReport
                 {
@@ -78,13 +81,15 @@ namespace SaturdaysChild.Controllers
                     BugDescription = model.BugDescription
                 };
 
-                satChilddb.BugReports.Add(report);
-                await satChilddb.SaveChangesAsync();
+                SatChilddb.BugReports.Add(report);
+                await SatChilddb.SaveChangesAsync();
 
                 return RedirectToAction("ThankYou", new { type = "bug" });
             }
-            // d'oh, something bad happened
-            return RedirectToAction("BugReport", model);
+            catch
+            {
+                return RedirectToAction("BugReport", model);
+            }
         }
 
         /// <summary>

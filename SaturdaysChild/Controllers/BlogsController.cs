@@ -45,7 +45,12 @@ namespace SaturdaysChild.Controllers
         [Authorize(Roles = "admin, employee")]
         public ActionResult Add(AddBlogViewModel model)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
+            {
+                return RedirectToAction("Add", model);
+            }
+
+            try
             {
                 var entry = new Blog
                 {
@@ -56,6 +61,7 @@ namespace SaturdaysChild.Controllers
                     Entry = model.Entry,
                     Tags = model.Tags
                 };
+
                 satChilddb.Blogs.Add(entry);
                 satChilddb.SaveChangesAsync();
                 // finding last entry
@@ -73,7 +79,10 @@ namespace SaturdaysChild.Controllers
                 // });
                 return RedirectToAction("Index", new { message = BlogMessages.AddSuccess });
             }
-            return RedirectToAction("Add");
+            catch
+            {
+                return RedirectToAction("Add", model);
+            }
         }
 
         /// <summary>
@@ -163,10 +172,15 @@ namespace SaturdaysChild.Controllers
         [Authorize(Roles = "admin")]
         public ActionResult Edit(EditBlogViewModel model)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
+            {
+                return RedirectToAction("Edit", model.Id);
+            }
+            
+            try
             {
                 var entry = satChilddb.Blogs.FirstOrDefault(a => a.Id == model.Id);
-                if(!entry.Author.Equals(model.Author))
+                if (!entry.Author.Equals(model.Author))
                 {
                     entry.Author = model.Author;
                     entry.AuthorId = satChilddb.Employees.FirstOrDefault(a => a.Name.Equals(model.Author)).Id;
@@ -174,10 +188,14 @@ namespace SaturdaysChild.Controllers
                 entry.Title = model.Title.Equals(entry.Title) ? entry.Title : model.Title;
                 entry.Entry = model.Entry.Equals(entry.Entry) ? entry.Entry : model.Entry;
                 entry.Tags = model.Tags.Equals(entry.Tags) ? entry.Tags : model.Tags;
+
                 satChilddb.SaveChangesAsync();
                 return RedirectToAction("Index", new { message = BlogMessages.EditSuccess });
             }
-            return RedirectToAction("Edit", model.Id);
+            catch
+            {
+                return RedirectToAction("Edit", model);
+            }
         }
 
         /// <summary>
@@ -251,15 +269,15 @@ namespace SaturdaysChild.Controllers
         [Authorize(Roles = "admin")]
         public ActionResult Search(SearchViewModel model)
         {
-            if (ModelState.IsValid)
-            {
-                var searchstring = model.SearchString;
-                if (!string.IsNullOrEmpty(model.Author)) searchstring = string.Concat(searchstring, "AND Author: ", model.Author, ", ");
-                if (!string.IsNullOrEmpty(model.Tags)) searchstring = string.Concat(searchstring, "AND Topics: ", model.Tags, ", ");
-                if (!string.IsNullOrEmpty(model.Type)) searchstring = string.Concat(searchstring, "AND Type: ", model.Type);
-                return RedirectToAction("Results", new { searchstring = searchstring, fields = "blog" });
+            if (ModelState.IsValid) {
+                return RedirectToAction("Search");
             }
-            return RedirectToAction("Search");
+
+            var searchstring = model.SearchString;
+            if (!string.IsNullOrEmpty(model.Author)) searchstring = string.Concat(searchstring, "AND Author: ", model.Author, ", ");
+            if (!string.IsNullOrEmpty(model.Tags)) searchstring = string.Concat(searchstring, "AND Topics: ", model.Tags, ", ");
+            if (!string.IsNullOrEmpty(model.Type)) searchstring = string.Concat(searchstring, "AND Type: ", model.Type);
+            return RedirectToAction("Results", new { searchstring = searchstring, fields = "blog" });
         }
 
         #region Helpers

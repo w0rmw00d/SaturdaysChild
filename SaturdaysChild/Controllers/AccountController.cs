@@ -134,9 +134,17 @@ namespace SaturdaysChild.Controllers
         [HttpGet]
         [Authorize(Roles = "admin")]
         [ValidateAntiForgeryToken]
-        public ActionResult EditAccount()
+        public ActionResult EditAccount(string accountName)
         {
-            return View();
+            var account = context.Users.First(a => a.Email.Equals(accountName));
+            var model = new EditAccountViewModel
+            {
+                Email = account.Email,
+                PhoneNumber = account.PhoneNumber,
+                UserName = account.UserName
+            };
+
+            return View(model);
         }
 
         //
@@ -147,7 +155,28 @@ namespace SaturdaysChild.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult EditAccount(EditAccountViewModel model)
         {
-            return View();
+            if (!ModelState.IsValid)
+            {
+                ViewBag.IndexMessage = "There was an error editing this account. Please check the error log and try again.";
+                return View(model);
+            }
+            
+            try
+            {
+                var account = context.Users.First(a => a.Email.Equals(model.Email));
+                account.Email = !account.Email.Equals(model.Email) ? account.Email = model.Email : account.Email = account.Email;
+                account.PhoneNumber = !account.PhoneNumber.Equals(model.PhoneNumber) ? account.PhoneNumber = model.PhoneNumber : account.PhoneNumber = account.PhoneNumber;
+                account.UserName = !account.UserName.Equals(model.UserName) ? account.UserName = model.UserName : account.UserName = account.UserName;
+
+                context.SaveChangesAsync();
+                ViewBag.IndexMessage = "Record edited.";
+                return RedirectToAction("Index", "Home");
+            }
+            catch
+            {
+                ViewBag.IndexMessage = "There was an error editing this account. Please check the error log and try again.";
+                return View(model);
+            }
         }
 
         // NOTE: this takes for granted a relatively limited number of accounts. If 
